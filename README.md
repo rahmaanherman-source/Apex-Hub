@@ -8760,4 +8760,204 @@ graph TD;
         K2a[Target: Public, Enthusiasts]
         K2b[Focus: UX, Scalability]
         K2c[Metrics: Retention, NPS, Engagement]
-        
+        import httpx
+import io
+from fastapi import FastAPI, HTTPException
+from fastapi.responses import StreamingResponse
+
+# Integrated Logic Layer: ONE-TAB EXECUTION
+async def call_api(url: str, method: str, json: dict = None, headers: dict = None):
+    async with httpx.AsyncClient() as client:
+        response = await client.request(method, url, json=json, headers=headers)
+        return response
+
+@app.post("/api/research/consensus")
+async def consensus_search(query: str):
+    """Integrated Research Engine for The Ark."""
+    if not CONSENSUS_API_KEY:
+        raise HTTPException(500, "Missing API Key")
+    
+    url = "https://api.consensus.app/v1/quick_search"
+    headers = {"Authorization": f"Bearer {CONSENSUS_API_KEY}"}
+    payload = {"query": query, "limit": 20}
+    
+    response = await call_api(url, "POST", json=payload, headers=headers)
+    if response.status_code != 200:
+        raise HTTPException(response.status_code, "Consensus retrieval failed.")
+    
+    return response.json()From fastapi import FastAPI, HTTPException
+from fastapi.responses import StreamingResponse
+import requests
+import os
+
+app = FastAPI(title="Apex AI Hub", version="1.0.0")
+
+# ENV VARS (set these in your .env or hosting dashboard)
+ELEVEN_API_KEY = os.getenv("ELEVEN_API_KEY", "")
+GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
+HUGGINGFACE_API_KEY = os.getenv("HUGGINGFACE_API_KEY", "")
+
+@app.get("/")
+def root():
+    return {"status": "ok", "hub": "Apex AI Hub"}
+
+@app.post("/api/voice/elevenlabs")
+def elevenlabs_tts(text: str, voice_id: str):
+    if not ELEVEN_API_KEY:
+        raise HTTPException(500, "Missing ELEVEN_API_KEY")
+
+    url = f"https://api.elevenlabs.io/v1/text-to-speech/{voice_id}"
+    headers = {
+        "xi-api-key": ELEVEN_API_KEY,
+        "Content-Type": "application/json"
+    }
+    payload = {
+        "text": text,
+        "voice_settings": {
+            "stability": 0.5,
+            "similarity_boost": 0.8
+        }
+    }
+    r = requests.post(url, json=payload, headers=headers)
+    if r.status_code != 200:
+        raise HTTPException(r.status_code, r.text)
+
+    return StreamingResponse(iter([r.content]), media_type="audio/mpeg")
+
+@app.post("/api/transcribe/whisper")
+def transcribe_whisper(audio_url: str):
+    if not OPENAI_API_KEY:
+        raise HTTPException(500, "Missing OPENAI_API_KEY")
+
+    import openai
+    openai.api_key = OPENAI_API_KEY
+
+    audio_data = requests.get(audio_url)
+    if audio_data.status_code != 200:
+        raise HTTPException(400, "Cannot fetch audio")
+
+    with open("temp_audio.mp3", "wb") as f:
+        f.write(audio_data.content)
+
+    audio_file = open("temp_audio.mp3", "rb")
+    transcript = openai.Audio.transcribe("whisper-1", audio_file)
+    return {"text": transcript["text"]}
+
+@app.post("/api/llm/groq")
+def groq_chat(prompt: str):
+    if not GROQ_API_KEY:
+        raise HTTPException(500, "Missing GROQ_API_KEY")
+
+    url = "https://api.groq.com/openai/v1/chat/completions"
+    headers = {
+        "Authorization": f"Bearer {GROQ_API_KEY}",
+        "Content-Type": "application/json"
+    }
+    payload = {
+        "model": "mixtral-8x7b-32768",
+        "messages": [{"role": "user", "content": prompt}],
+        "temperature": 0.7
+    }
+    r = requests.post(url, json=payload, headers=headers)
+    if r.status_code != 200:
+        raise HTTPException(r.status_code, r.text)
+
+    data = r.json()
+    return {"reply": data["choices"][0]["message"]["content"]}
+
+@app.post("/api/hf/text")
+def hf_text_inference(model_id: str, prompt: str):
+    if not HUGGINGFACE_API_KEY:
+        raise HTTPException(500, "Missing HUGGINGFACE_API_KEY")
+
+    url = f"https://api-inference.huggingface.co/models/{model_id}"
+    headers = {"Authorization": f"Bearer {HUGGINGFACE_API_KEY}"}
+    payload = {"inputs": prompt}
+
+    r = requests.post(url, json=payload, headers=headers)
+    if r.status_code != 200:
+        raise HTTPException(r.status_code, r.text)
+
+    return r.json()
+
+@app.post("/api/llm/gemini")
+def gemini_text(prompt: str):
+    if not GEMINI_API_KEY:
+        raise HTTPException(500, "Missing GEMINI_API_KEY")
+
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key={GEMINI_API_KEY}"
+    payload = {
+        "contents": [{"parts": [{"text": prompt}]}]
+    }
+
+    r = requests.post(url, json=payload)
+    if r.status_code != 200:
+        raise HTTPException(r.status_code, r.text)
+
+    data = r.json()
+    text = data["candidates"][0]["content"]["parts"][0]["text"]
+    return {"reply": text}
+
+// frontend example (TypeScript)
+const res = await fetch("/api/llm/groq", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ prompt: "Write a hook for Mac Titan" })
+});
+const data = await res.json();
+console.log(data.reply);
+
+fastapi
+uvicorn
+requests
+openai
+python-dotenv
+
+pip install -r requirements.txt
+uvicorn ai_hub_backend:app --reload
+
+import os
+import requests
+from fastapi import FastAPI, HTTPException
+
+app = FastAPI(title="Apex AI Hub", version="1.0.0")
+
+CONSENSUS_API_KEY = os.getenv("CONSENSUS_API_KEY", "")
+
+@app.post("/api/research/consensus")
+def consensus_search(query: str):
+    if not CONSENSUS_API_KEY:
+        raise HTTPException(500, "Missing CONSENSUS_API_KEY")
+
+    url = "https://api.consensus.app/v1/quick_search"
+    headers = {
+        "Authorization": f"Bearer {CONSENSUS_API_KEY}",
+        "Content-Type": "application/json"
+    }
+    payload = {
+        "query": query,
+        "limit": 20  # top 20 papers
+    }
+
+    r = requests.post(url, json=payload, headers=headers)
+    if r.status_code != 200:
+        raise HTTPException(r.status_code, r.text)
+
+    data = r.json()
+    # You can reshape this however you want for Gabby
+    return {
+        "papers": [
+            {
+                "title": p.get("title"),
+                "abstract": p.get("abstract"),
+                "doi": p.get("doi"),
+                "url": p.get("url"),
+                "publish_date": p.get("publish_date"),
+                "citation_count": p.get("citation_count"),
+                "relevance": p.get("relevance_score"),
+            }
+            for p in data.get("results", [])
+        ]
+    }
