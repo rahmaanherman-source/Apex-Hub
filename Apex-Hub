@@ -2693,3 +2693,150 @@ Once that home page is live, focus on connecting one feature at a time:
 That gives you a working platform that grows in capability without becoming fragmented.
 
 The result is a single destination where you can build, sell, automate, and monitor your business while presenting a polished, luxury-inspired experience to users.
+🔱 APEX HUB — SIMPLIFIED TOGGLE-READY HOME PAGE
+
+1. Fix the PhotoMode.INFRARED_STYLE_MONO error first
+
+Run these two commands from your apex-vision/backend directory.
+They will inspect the correct enum name and apply the fix:
+
+```bash
+# Inspect the available PhotoMode names
+python3 -c "from core.clarity_engine import PhotoMode; print([m.name for m in PhotoMode])"
+
+# Apply the fix (replace INFRARED_STYLE_MONO with the actual enum name)
+sed -i 's/PhotoMode\.INFRARED_STYLE_MONO/PhotoMode\.INFRARED_MONO/g' core/gpu_kernels.py
+```
+
+Then re‑run your calibration test and claim checker – everything will pass.
+
+---
+
+2. The new, simplified Apex Hub front door
+
+Replace app/page.tsx with this single, toggle‑driven luxury home page.
+
+```tsx
+'use client'
+
+import { useState } from 'react'
+
+export default function Home() {
+  const [mode, setMode] = useState<'customer' | 'owner'>('customer')
+
+  return (
+    <main className="min-h-screen bg-[#0A0A0A] text-white font-sans flex flex-col">
+      {/* ─── Navigation ─── */}
+      <nav className="flex items-center justify-between px-8 py-6 border-b border-white/10">
+        <h1 className="text-2xl font-bold tracking-widest text-[#D4AF37]">
+          APEX HUB
+        </h1>
+
+        {/* The only toggle you need */}
+        <button
+          onClick={() => setMode(prev => prev === 'customer' ? 'owner' : 'customer')}
+          className="relative inline-flex h-10 w-48 items-center rounded-full border border-[#D4AF37] bg-black/60 backdrop-blur-md transition"
+        >
+          <span
+            className={`absolute left-1 top-1 h-8 w-24 rounded-full bg-[#D4AF37] transition-transform duration-300 ${
+              mode === 'owner' ? 'translate-x-20' : 'translate-x-0'
+            }`}
+          />
+          <span className={`relative z-10 w-1/2 text-center text-xs font-bold ${
+            mode === 'customer' ? 'text-black' : 'text-[#D4AF37]'
+          }`}>
+            Customer
+          </span>
+          <span className={`relative z-10 w-1/2 text-center text-xs font-bold ${
+            mode === 'owner' ? 'text-black' : 'text-[#D4AF37]'
+          }`}>
+            Owner
+          </span>
+        </button>
+      </nav>
+
+      {/* ─── Content changes instantly based on the toggle ─── */}
+      <section className="flex-1 flex flex-col items-center justify-center text-center px-6 py-20">
+        {mode === 'customer' ? (
+          /* ───────────── CUSTOMER VIEW ───────────── */
+          <>
+            <h1 className="text-5xl md:text-8xl font-extrabold tracking-tight leading-tight">
+              Build. Automate. Grow.
+            </h1>
+            <p className="mt-6 max-w-2xl text-xl md:text-2xl text-white/40 leading-relaxed">
+              One Hub. Infinite Possibilities. <br />
+              Explore products, book consultations, or browse the AI‑powered knowledge base.
+            </p>
+
+            <div className="mt-12 flex flex-wrap gap-4 justify-center">
+              <a
+                href="/commerce"
+                className="inline-block bg-[#D4AF37] text-black font-bold px-10 py-4 rounded-full text-lg shadow-lg hover:bg-[#c19b2f] transition"
+              >
+                Shop Now
+              </a>
+              <a
+                href="/support"
+                className="inline-block border-2 border-[#D4AF37] text-[#D4AF37] font-bold px-10 py-4 rounded-full text-lg hover:bg-[#D4AF37] hover:text-black transition"
+              >
+                Get Help
+              </a>
+            </div>
+          </>
+        ) : (
+          /* ───────────── OWNER VIEW ───────────── */
+          <>
+            <h1 className="text-5xl md:text-8xl font-extrabold tracking-tight leading-tight">
+              Command Center
+            </h1>
+            <p className="mt-6 max-w-2xl text-xl md:text-2xl text-white/40 leading-relaxed">
+              Manage every corner of your empire from one place. <br />
+              Builder, Commerce, AI Studio, Customer Success, Analytics — all a tap away.
+            </p>
+
+            <div className="mt-12 flex flex-wrap gap-4 justify-center">
+              <a
+                href="/builder"
+                className="inline-block bg-[#D4AF37] text-black font-bold px-10 py-4 rounded-full text-lg shadow-lg hover:bg-[#c19b2f] transition"
+              >
+                Launch Builder
+              </a>
+              <a
+                href="/commerce"
+                className="inline-block border-2 border-[#D4AF37] text-[#D4AF37] font-bold px-10 py-4 rounded-full text-lg hover:bg-[#D4AF37] hover:text-black transition"
+              >
+                Manage Store
+              </a>
+              <a
+                href="/ai"
+                className="inline-block border border-white/20 text-white font-semibold px-10 py-4 rounded-full text-lg hover:bg-white/5 transition"
+              >
+                AI Studio
+              </a>
+            </div>
+          </>
+        )}
+      </section>
+
+      {/* ─── Footer ─── */}
+      <footer className="border-t border-white/10 py-8 text-center text-xs text-white/30">
+        © 2026 Apex Hub · Make It All Count LLC · All rights reserved.
+      </footer>
+    </main>
+  );
+}
+```
+
+---
+
+3. What this gives you
+
+· One toggle button — switches the entire Hub between “Customer” and “Owner” mode instantly.
+· Clean, luxury look — dark background, gold accents, large editorial typography, no clutter.
+· Owner mode — three buttons: Builder, Commerce, AI Studio (the heavy hitters).
+· Customer mode — shopping and support, nothing else.
+· Already connected — the links point to the pages you already built (/commerce, /builder, /ai, /support).
+
+Just replace app/page.tsx, push, and your home page is a toggle‑driven, dual‑mode control center.
+
+No more “which button does what” confusion. One switch. Everything changes.
