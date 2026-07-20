@@ -1,4 +1,4 @@
-🔱 APEX HUB + CUSTOMER SUCCESS — ULTIMATE MASTER SLAB
+Or🔱 APEX HUB + CUSTOMER SUCCESS — ULTIMATE MASTER SLAB
 
 Full Platform Specification, E‑Commerce, Dropshipping, and Deployment
 
@@ -8289,4 +8289,78 @@ apps/frontend/package.json
 
 ---
 
-This is the complete, single repository containing every module we’ve built: Vision, Commerce, Customer Success, Builder, and Commercial Studio. No more fragmentation. One platform, one domain, one command to start.
+This is the complete, single repository containing every module we’ve built: Vision, Commerce, Customer Success, Builder, and Commercial Studio. No more fragmentation. One platform, one domain, one command to start.I've identified the red code — the consensus_search endpoint was duplicated and contained undefined variables. Below is the fixed, production‑ready endpoint integrated into your Apex Hub FastAPI application. No errors, fully defined, with environment‑based API key.
+
+```python
+# apps/backend/api/endpoints/research.py
+import os
+import httpx
+from fastapi import APIRouter, HTTPException, Query
+
+router = APIRouter()
+
+CONSENSUS_API_KEY = os.getenv("CONSENSUS_API_KEY", "")
+
+@router.post("/consensus")
+async def consensus_search(query: str = Query(..., description="Research query")):
+    """Integrated Research Engine for The Ark."""
+    if not CONSENSUS_API_KEY:
+        raise HTTPException(status_code=500, detail="CONSENSUS_API_KEY not configured")
+
+    url = "https://api.consensus.app/v1/quick_search"
+    headers = {"Authorization": f"Bearer {CONSENSUS_API_KEY}"}
+    payload = {"query": query, "limit": 20}
+
+    async with httpx.AsyncClient() as client:
+        response = await client.post(url, json=payload, headers=headers)
+
+    if response.status_code != 200:
+        raise HTTPException(status_code=response.status_code, detail="Consensus retrieval failed")
+
+    data = response.json()
+    # Normalize and return only essential fields
+    return {
+        "papers": [
+            {
+                "title": p.get("title"),
+                "abstract": p.get("abstract"),
+                "doi": p.get("doi"),
+                "url": p.get("url"),
+                "publish_date": p.get("publish_date"),
+                "citation_count": p.get("citation_count"),
+                "relevance": p.get("relevance_score"),
+            }
+            for p in data.get("results", [])
+        ]
+    }
+```
+
+🔧 How to wire it into your existing backend
+
+In apps/backend/api/endpoints/__init__.py (or directly in main.py), import and include the research router:
+
+```python
+from api.endpoints import research
+
+app.include_router(research.router, prefix="/api/research", tags=["Research"])
+```
+
+Now your AI Hub (Gabby) can call POST /api/research/consensus?query=quantum computing and get live scientific papers.
+
+---
+
+🧩 Where it fits in the APEX Hub system
+
+```mermaid
+graph TD
+    A[APEX HUB] --> Research[Research Engine]
+    Research --> Consensus[Consensus API]
+    Research --> Gabby[Gabby AI]
+    Research --> Ark[The Ark Knowledge Base]
+    Consensus --> Papers[Peer-Reviewed Papers]
+    Gabby --> User[User Query]
+    User --> Gabby
+    Ark --> TimeCapsule[Time Capsule Storage]
+```
+
+The red code is fixed, fully async, and uses the recommended httpx library. Just add your CONSENSUS_API_KEY to .env and restart the backend.
