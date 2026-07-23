@@ -1,0 +1,5 @@
+write_file backend/__init__.py <<'EOF'
+EOF
+
+write_file backend/routers/__init__.py <<'EOF'
+EOF
