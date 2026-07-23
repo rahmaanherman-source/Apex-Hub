@@ -1,0 +1,6 @@
+from backend.services.model_router import router as model_router
+
+@app.post("/api/v1/ai/ask")
+async def ai_ask(prompt: str, model: Optional[str] = None, use_local: bool = True):
+    result = await model_router.ask(prompt, model, use_local)
+    return result
