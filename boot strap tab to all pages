@@ -1,0 +1,258 @@
+#!/usr/bin/env bash
+set -euo pipefail
+PROJECT="Apex-Hub"
+mkdir -p $PROJECT
+cd $PROJECT
+
+write_file() { mkdir -p "$(dirname "$1")"; cat > "$1"; }
+
+write_file src/pages/Dashboard.tsx <<'EOF'
+import { useEffect, useState } from 'react'
+import { fetchAPI } from '../utils/api'
+import MetricsCard from '../components/MetricsCard'
+
+export default function Dashboard() {
+  const [stats, setStats] = useState<any>(null)
+  useEffect(() => { fetchAPI('/dashboard').then(setStats) }, [])
+  return (
+    <div>
+      <h1 className="text-2xl font-display text-gold mb-6">Dashboard</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <MetricsCard label="Revenue (MRR)" value={stats?.mrr ?? '…'} />
+        <MetricsCard label="Orders" value={stats?.orders ?? '…'} />
+        <MetricsCard label="Customers" value={stats?.customers ?? '…'} />
+        <MetricsCard label="Trust Score" value={stats?.trustScore ?? '…'} />
+      </div>
+    </div>
+  )
+}
+EOF
+
+write_file src/pages/Marketplace.tsx <<'EOF'
+import { useEffect, useState } from 'react'
+import { fetchAPI } from '../utils/api'
+
+export default function Marketplace() {
+  const [products, setProducts] = useState<any[]>([])
+  useEffect(() => { fetchAPI('/products').then(d => setProducts(d.items || [])) }, [])
+  return (
+    <div>
+      <h1 className="text-2xl font-display text-gold mb-4">Marketplace</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {products.map((p: any) => (
+          <div key={p.id} className="glass-card p-4 rounded-xl">
+            <h3 className="text-lg font-semibold">{p.name}</h3>
+            <p className="text-silver text-sm mt-1">{p.description}</p>
+            <p className="text-gold mt-2">{p.price}</p>
+            <button className="mt-3 bg-electric text-white px-4 py-2 rounded">Buy</button>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+EOF
+
+write_file src/pages/Orders.tsx <<'EOF'
+import { useEffect, useState } from 'react'
+import { fetchAPI } from '../utils/api'
+
+export default function Orders() {
+  const [orders, setOrders] = useState<any[]>([])
+  useEffect(() => { fetchAPI('/orders').then(d => setOrders(d.orders || [])) }, [])
+  return (
+    <div>
+      <h1 className="text-2xl font-display text-gold mb-4">Orders</h1>
+      <div className="space-y-4">
+        {orders.map((o: any) => (
+          <div key={o.id} className="glass-card p-4 rounded-xl flex justify-between">
+            <div>
+              <p className="font-semibold">{o.customer}</p>
+              <p className="text-silver text-sm">{o.date}</p>
+            </div>
+            <p className="text-gold">${o.total}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+EOF
+
+write_file src/pages/Products.tsx <<'EOF'
+import { useEffect, useState } from 'react'
+import { fetchAPI } from '../utils/api'
+
+export default function Products() {
+  const [products, setProducts] = useState<any[]>([])
+  useEffect(() => { fetchAPI('/products').then(d => setProducts(d.items || [])) }, [])
+  return (
+    <div>
+      <h1 className="text-2xl font-display text-gold mb-4">Products</h1>
+      <div className="space-y-4">
+        {products.map((p: any) => (
+          <div key={p.id} className="glass-card p-4 rounded-xl flex justify-between">
+            <span>{p.name}</span>
+            <span className="text-gold">{p.price}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+EOF
+
+write_file src/pages/Customers.tsx <<'EOF'
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { fetchAPI } from '../utils/api'
+
+export default function Customers() {
+  const [customers, setCustomers] = useState<any[]>([])
+  useEffect(() => { fetchAPI('/customers').then(d => setCustomers(d.customers || [])) }, [])
+  return (
+    <div>
+      <h1 className="text-2xl font-display text-gold mb-4">Customers</h1>
+      <div className="space-y-4">
+        {customers.map((c: any) => (
+          <Link key={c.id} to={`/customers/${c.id}`} className="glass-card p-4 rounded-xl flex justify-between hover:bg-white/5">
+            <span>{c.name}</span>
+            <span className="text-silver text-sm">{c.email}</span>
+          </Link>
+        ))}
+      </div>
+    </div>
+  )
+}
+EOF
+
+write_file src/pages/CustomerDetails.tsx <<'EOF'
+import { useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { fetchAPI } from '../utils/api'
+
+export default function CustomerDetails() {
+  const { id } = useParams()
+  const [customer, setCustomer] = useState<any>(null)
+
+  useEffect(() => {
+    fetchAPI(`/customers/${id}`).then(setCustomer)
+  }, [id])
+
+  if (!customer) return <p className="text-silver">Loading…</p>
+
+  return (
+    <div>
+      <h1 className="text-2xl font-display text-gold mb-4">{customer.name}</h1>
+      <div className="glass-card p-6 rounded-xl">
+        <p className="text-silver">Email: {customer.email}</p>
+        <p className="text-silver mt-2">Phone: {customer.phone || 'N/A'}</p>
+        <p className="text-silver mt-2">Orders: {customer.orderCount}</p>
+        <p className="text-silver mt-2">Total spent: ${customer.totalSpent}</p>
+        <p className="text-silver mt-2">Trust score: {customer.trustScore}</p>
+      </div>
+    </div>
+  )
+}
+EOF
+
+write_file src/pages/CustomerSuccess.tsx <<'EOF'
+import { useEffect, useState } from 'react'
+import { fetchAPI } from '../utils/api'
+
+export default function CustomerSuccess() {
+  const [tickets, setTickets] = useState<any[]>([])
+  useEffect(() => { fetchAPI('/tickets').then(d => setTickets(d.tickets || [])) }, [])
+  return (
+    <div>
+      <h1 className="text-2xl font-display text-gold mb-4">Customer Success</h1>
+      <div className="space-y-4">
+        {tickets.map((t: any) => (
+          <div key={t.id} className="glass-card p-4 rounded-xl">
+            <p className="font-semibold">{t.subject}</p>
+            <p className="text-silver text-sm">{t.status} — {t.customer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+EOF
+
+write_file src/pages/Merchant.tsx <<'EOF'
+import { useEffect, useState } from 'react'
+import { fetchAPI } from '../utils/api'
+
+export default function Merchant() {
+  const [merchant, setMerchant] = useState<any>(null)
+  useEffect(() => { fetchAPI('/merchant/me').then(setMerchant) }, [])
+  return (
+    <div>
+      <h1 className="text-2xl font-display text-gold mb-4">Merchant</h1>
+      {merchant && (
+        <div className="glass-card p-4 rounded-xl">
+          <p className="text-white">Stripe account: {merchant.stripe_id}</p>
+          <p className="text-silver">Balance: ${merchant.balance}</p>
+        </div>
+      )}
+    </div>
+  )
+}
+EOF
+
+write_file src/pages/Analytics.tsx <<'EOF'
+import { useEffect, useState } from 'react'
+import { fetchAPI } from '../utils/api'
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
+
+export default function Analytics() {
+  const [data, setData] = useState<any[]>([])
+  useEffect(() => { fetchAPI('/analytics/revenue').then(res => setData(res.history || [])) }, [])
+  return (
+    <div>
+      <h1 className="text-2xl font-display text-gold mb-4">Analytics</h1>
+      <div className="glass-card p-4 rounded-xl">
+        <ResponsiveContainer width="100%" height={300}>
+          <LineChart data={data}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#1E2A5E" />
+            <XAxis dataKey="date" stroke="#A8B2D1" />
+            <YAxis stroke="#A8B2D1" />
+            <Tooltip />
+            <Line type="monotone" dataKey="revenue" stroke="#D4AF37" strokeWidth={2} />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+  )
+}
+EOF
+
+write_file src/pages/CryptoPulse.tsx <<'EOF'
+export default function CryptoPulse() { return <div><h1 className="text-2xl font-display text-gold">CryptoPulse</h1><p className="text-silver mt-2">Real‑time crypto tracking.</p></div> }
+EOF
+
+write_file src/pages/TruthGate.tsx <<'EOF'
+export default function TruthGate() { return <div><h1 className="text-2xl font-display text-gold">TruthGate</h1><p className="text-silver mt-2">Audit & compliance center.</p></div> }
+EOF
+
+write_file src/pages/Automation.tsx <<'EOF'
+export default function Automation() { return <div><h1 className="text-2xl font-display text-gold">Automation</h1><p className="text-silver mt-2">Workflow builder coming soon.</p></div> }
+EOF
+
+write_file src/pages/Studio.tsx <<'EOF'
+export default function Studio() { return <div><h1 className="text-2xl font-display text-gold">Studio</h1><p className="text-silver mt-2">Media & brand assets.</p></div> }
+EOF
+
+write_file src/pages/Media.tsx <<'EOF'
+export default function Media() { return <div><h1 className="text-2xl font-display text-gold">Media</h1><p className="text-silver mt-2">Library & uploads.</p></div> }
+EOF
+
+write_file src/pages/Settings.tsx <<'EOF'
+export default function Settings() { return <div><h1 className="text-2xl font-display text-gold">Settings</h1><p className="text-silver mt-2">Manage your preferences.</p></div> }
+EOF
+
+write_file src/pages/Admin.tsx <<'EOF'
+export default function Admin() { return <div><h1 className="text-2xl font-display text-gold">Admin</h1><p className="text-silver mt-2">User & environment management.</p></div> }
+EOF
+
+echo "Tab 2 complete. All page components generated."
