@@ -157,3 +157,11 @@ const data = await response.json();
   reasoning: anthropic
   vision: gemini
   embeddings: local
+# (existing config…)
+
+routing:
+  code: openai
+  customer_support: local
+  reasoning: anthropic
+  vision: gemini
+  embeddings: local
