@@ -1,0 +1,394 @@
+#!/usr/bin/env bash
+set -euo pipefail
+PROJECT="Apex-Hub"
+mkdir -p $PROJECT
+cd $PROJECT
+
+write_file() { mkdir -p "$(dirname "$1")"; cat > "$1"; }
+
+# ---------- ROOT CONFIG ----------
+write_file package.json <<'EOF'
+{
+  "name": "apex-hub",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "backend:dev": "uvicorn backend.main:app --reload",
+    "db:init": "psql $DATABASE_URL < database/init.sql"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.20.0",
+    "framer-motion": "^10.16.0",
+    "lucide-react": "^0.294.0",
+    "recharts": "^2.10.0",
+    "@stripe/stripe-js": "^2.1.0",
+    "@tanstack/react-query": "^5.8.0",
+    "tailwindcss": "^3.3.0",
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.4.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@vitejs/plugin-react": "^4.2.0",
+    "typescript": "^5.3.0",
+    "vite": "^5.0.0"
+  }
+}
+EOF
+
+write_file vite.config.ts <<'EOF'
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+  server: { port: 3000, proxy: { '/api': 'http://localhost:8000' } },
+  build: { outDir: 'dist' }
+})
+EOF
+
+write_file tsconfig.json <<'EOF'
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noFallthroughCasesInSwitch": true,
+    "paths": { "@/*": ["./src/*"] }
+  },
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
+EOF
+
+write_file tsconfig.node.json <<'EOF'
+{
+  "compilerOptions": {
+    "composite": true,
+    "skipLibCheck": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["vite.config.ts"]
+}
+EOF
+
+write_file tailwind.config.ts <<'EOF'
+import type { Config } from 'tailwindcss'
+export default {
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  theme: {
+    extend: {
+      colors: {
+        gold: '#D4AF37',
+        obsidian: '#0A0E1A',
+        silver: '#A8B2D1',
+        electric: '#0066FF',
+      },
+      fontFamily: {
+        display: ['Space Grotesk', 'sans-serif'],
+        body: ['Inter', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
+      },
+    },
+  },
+  plugins: [],
+} satisfies Config
+EOF
+
+write_file postcss.config.js <<'EOF'
+export default {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+}
+EOF
+
+write_file index.html <<'EOF'
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>APEX HUB</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Inter:wght@400;500;600&family=JetBrains+Mono&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-obsidian text-white font-body">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+EOF
+
+write_file .env.example <<'EOF'
+DATABASE_URL=postgresql://apex:apex@localhost:5432/apex
+REDIS_URL=redis://localhost:6379
+QDRANT_URL=http://localhost:6333
+SECRET_KEY=change-me-in-production
+STRIPE_SECRET_KEY=sk_test_...
+SHOPIFY_API_KEY=...
+SHOPIFY_API_SECRET=...
+SHOPIFY_STORE_URL=...
+CLOUDFLARE_API_KEY=...
+GITHUB_TOKEN=...
+EOF
+
+write_file netlify.toml <<'EOF'
+[build]
+  command = "npm run build"
+  publish = "dist"
+EOF
+
+write_file Dockerfile <<'EOF'
+FROM node:20-alpine as build
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+FROM nginx:alpine
+COPY --from=build /app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+EOF
+
+write_file .gitignore <<'EOF'
+node_modules/
+dist/
+.env
+*.log
+EOF
+
+write_file README.md <<'EOF'
+# APEX HUB
+The unified Business Operating System.
+EOF
+
+# ---------- REACT CORE ----------
+write_file src/main.tsx <<'EOF'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import App from './App'
+import './styles/globals.css'
+
+const queryClient = new QueryClient()
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </QueryClientProvider>
+  </React.StrictMode>
+)
+EOF
+
+write_file src/App.tsx <<'EOF'
+import { Routes, Route, Navigate } from 'react-router-dom'
+import Sidebar from './components/Sidebar'
+import GabbyOrb from './components/GabbyOrb'
+import Dashboard from './pages/Dashboard'
+import Marketplace from './pages/Marketplace'
+import Orders from './pages/Orders'
+import Products from './pages/Products'
+import Customers from './pages/Customers'
+import CustomerDetails from './pages/CustomerDetails'
+import CustomerSuccess from './pages/CustomerSuccess'
+import Merchant from './pages/Merchant'
+import Analytics from './pages/Analytics'
+import CryptoPulse from './pages/CryptoPulse'
+import TruthGate from './pages/TruthGate'
+import Automation from './pages/Automation'
+import Studio from './pages/Studio'
+import Media from './pages/Media'
+import Settings from './pages/Settings'
+import Admin from './pages/Admin'
+
+export default function App() {
+  return (
+    <div className="flex h-screen overflow-hidden bg-obsidian text-white">
+      <Sidebar />
+      <main className="flex-1 overflow-y-auto p-6">
+        <Routes>
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/marketplace" element={<Marketplace />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/customers" element={<Customers />} />
+          <Route path="/customers/:id" element={<CustomerDetails />} />
+          <Route path="/customer-success" element={<CustomerSuccess />} />
+          <Route path="/merchant" element={<Merchant />} />
+          <Route path="/analytics" element={<Analytics />} />
+          <Route path="/crypto-pulse" element={<CryptoPulse />} />
+          <Route path="/truth-gate" element={<TruthGate />} />
+          <Route path="/automation" element={<Automation />} />
+          <Route path="/studio" element={<Studio />} />
+          <Route path="/media" element={<Media />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/admin" element={<Admin />} />
+        </Routes>
+      </main>
+      <GabbyOrb />
+    </div>
+  )
+}
+EOF
+
+write_file src/utils/api.ts <<'EOF'
+const BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1';
+export async function fetchAPI(path: string) {
+  const res = await fetch(`${BASE}${path}`);
+  if (!res.ok) throw new Error(`API ${path} failed`);
+  return res.json();
+}
+EOF
+
+write_file src/styles/globals.css <<'EOF'
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #0A0E1A;
+  color: #ECEDEE;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+EOF
+
+write_file src/components/Sidebar.tsx <<'EOF'
+import { NavLink } from 'react-router-dom'
+
+const navItems = [
+  { to: '/dashboard', label: 'Dashboard', icon: '⊞' },
+  { to: '/marketplace', label: 'Marketplace', icon: '⊡' },
+  { to: '/orders', label: 'Orders', icon: '≡' },
+  { to: '/products', label: 'Products', icon: '☰' },
+  { to: '/customers', label: 'Customers', icon: '⛁' },
+  { to: '/customer-success', label: 'Customer Success', icon: '✉' },
+  { to: '/merchant', label: 'Merchant', icon: '⚒' },
+  { to: '/analytics', label: 'Analytics', icon: '⌹' },
+  { to: '/crypto-pulse', label: 'CryptoPulse', icon: '⬡' },
+  { to: '/truth-gate', label: 'TruthGate', icon: '⛊' },
+  { to: '/automation', label: 'Automation', icon: '⛭' },
+  { to: '/studio', label: 'Studio', icon: '❋' },
+  { to: '/media', label: 'Media', icon: '⛏' },
+  { to: '/settings', label: 'Settings', icon: '⚙' },
+  { to: '/admin', label: 'Admin', icon: '⛐' },
+]
+
+export default function Sidebar() {
+  return (
+    <aside className="w-64 bg-obsidian border-r border-silver/20 flex-shrink-0 overflow-y-auto">
+      <div className="p-4 border-b border-silver/20">
+        <span className="text-gold font-display text-xl tracking-wider">🔱 APEX HUB</span>
+      </div>
+      <nav className="p-2 space-y-1">
+        {navItems.map(item => (
+          <NavLink
+            key={item.to}
+            to={item.to}
+            className={({ isActive }) =>
+              `flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors ${
+                isActive ? 'bg-gold/10 text-gold' : 'text-silver hover:bg-white/5'
+              }`
+            }
+          >
+            <span className="w-5 text-center">{item.icon}</span>
+            {item.label}
+          </NavLink>
+        ))}
+      </nav>
+    </aside>
+  )
+}
+EOF
+
+write_file src/components/GabbyOrb.tsx <<'EOF'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+
+export default function GabbyOrb() {
+  const [open, setOpen] = useState(false)
+  return (
+    <>
+      <button
+        onClick={() => setOpen(!open)}
+        className="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-gradient-to-br from-gold to-purple-700 shadow-lg shadow-gold/20 flex items-center justify-center z-50 hover:scale-110 transition-transform"
+      >
+        <span className="text-2xl">🔮</span>
+      </button>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            className="fixed bottom-24 right-6 w-80 h-96 bg-obsidian border border-silver/20 rounded-xl shadow-2xl z-50 flex flex-col"
+          >
+            <div className="p-4 border-b border-silver/20 flex justify-between">
+              <span className="font-display text-gold">Gabby AI</span>
+              <button onClick={() => setOpen(false)} className="text-silver hover:text-white">✕</button>
+            </div>
+            <div className="flex-1 p-4 overflow-y-auto text-sm text-silver">
+              <p>Hello, I'm Gabby. How can I assist you today?</p>
+            </div>
+            <div className="p-3 border-t border-silver/20">
+              <input
+                type="text"
+                placeholder="Message Gabby…"
+                className="w-full bg-white/5 border border-silver/20 rounded-lg px-3 py-2 text-white text-sm"
+              />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  )
+}
+EOF
+
+write_file src/components/MetricsCard.tsx <<'EOF'
+interface Props { label: string; value: string | number; }
+export default function MetricsCard({ label, value }: Props) {
+  return (
+    <div className="glass-card p-4 rounded-xl">
+      <p className="text-xs uppercase tracking-wide text-silver">{label}</p>
+      <p className="text-2xl font-display text-gold mt-1">{value}</p>
+    </div>
+  )
+}
+EOF
+
+echo "Tab 1 complete. Core structure generated."
