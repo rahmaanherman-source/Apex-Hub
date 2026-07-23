@@ -1,0 +1,7 @@
+const response = await fetch('/api/v1/ai/ask', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ prompt: "Hello", use_local: true })
+});
+const data = await response.json();
+// data.answer, data.provider, data.model
