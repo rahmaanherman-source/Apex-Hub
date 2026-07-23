@@ -88,3 +88,67 @@ automation:
   github: true
   docker: true
   cloudflare: true
+# config/providers.yaml
+# AI Providers Configuration
+# Enable any provider by setting enabled: true and filling the required fields.
+# Environment variables are automatically expanded.
+
+ai:
+  # Local runtimes – APEX Hub will auto‑detect which are running.
+  local:
+    ollama:
+      enabled: true
+      endpoint: http://localhost:11434
+    lmstudio:
+      enabled: true
+      endpoint: http://localhost:1234/v1
+    llamacpp:
+      enabled: true
+      endpoint: http://localhost:8080
+    vllm:
+      enabled: true
+      endpoint: http://localhost:8001
+
+  # Cloud providers – used when no local model is available.
+  cloud:
+    openai:
+      enabled: true
+      api_key: ${OPENAI_API_KEY}
+    azure_openai:
+      enabled: true
+      api_key: ${AZURE_OPENAI_API_KEY}
+      endpoint: ${AZURE_OPENAI_ENDPOINT}
+    anthropic:
+      enabled: true
+      api_key: ${ANTHROPIC_API_KEY}
+    gemini:
+      enabled: true
+      api_key: ${GEMINI_API_KEY}
+    openrouter:
+      enabled: true
+      api_key: ${OPENROUTER_API_KEY}
+
+storage:
+  postgres:
+    url: ${DATABASE_URL}
+  redis:
+    url: ${REDIS_URL}
+  qdrant:
+    url: ${QDRANT_URL}
+
+commerce:
+  stripe: true
+  shopify: true
+  printify: true
+  syncee: true
+
+automation:
+  github: true
+  docker: true
+  cloudflare: trueconst response = await fetch('/api/v1/ai/ask', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ prompt: "Hello", use_local: true })
+});
+const data = await response.json();
+// data.answer, data.provider, data.model
