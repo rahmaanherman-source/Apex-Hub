@@ -1,0 +1,11 @@
+flowchart TD
+    Executive((Executive / Owner)):::exec --> Phoenix
+    Phoenix[APEX Phoenix<br>Governance / Control Plane]:::gov --> Godspeed
+    Godspeed[GODSPEED Engine<br>Runtime / Shared Services]:::engine --> Registry
+    Registry[Capability Registry<br>Reusable Building Blocks]:::reg --> Experiences
+    Experiences[Experiences<br>Terminal, Bridge, Studio...]:::exp
+    classDef exec fill:#D4AF37,color:#000
+    classDef gov fill:#1E3A8A,color:#fff
+    classDef engine fill:#7C3AED,color:#fff
+    classDef reg fill:#15803D,color:#fff
+    classDef exp fill:#B45309,color:#fff
