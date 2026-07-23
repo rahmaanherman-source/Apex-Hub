@@ -1,0 +1,11 @@
+@router.get("/customers/{customer_id}")
+async def get_customer(customer_id: str):
+    return {
+        "id": customer_id,
+        "name": "Maria Santos",
+        "email": "maria@example.com",
+        "phone": "+52 555 123 4567",
+        "orderCount": 12,
+        "totalSpent": 1499.00,
+        "trustScore": "96%"
+    }
