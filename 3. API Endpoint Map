@@ -1,0 +1,28 @@
+flowchart LR
+    subgraph Auth
+      A1[/biometric/challenge/]
+      A2[/biometric/register/]
+      A3[/biometric/verify/]
+    end
+    subgraph Identity
+      I1[/identity/me/]
+      I2[/identity/switch/]
+      I3[/identity/accounts/]
+    end
+    subgraph Vault
+      V1[/vault/credential/]
+      V2[/vault/retrieve/]
+    end
+    subgraph Payments
+      P1[/payment/create-checkout/]
+      P2[/payment/webhook/]
+    end
+    subgraph Admin
+      AD1[/admin/watchdog/]
+      AD2[/admin/permissions/]
+    end
+    subgraph Workflow
+      W1[/workflow/beat/]
+      W2[/workflow/code/]
+      W3[/workflow/lesson/]
+    end
