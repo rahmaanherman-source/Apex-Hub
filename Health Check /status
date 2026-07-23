@@ -1,0 +1,17 @@
+GitHub Push
+    ↓
+GitHub Actions
+    ↓
+Build Docker Image
+    ↓
+Run Tests
+    ↓
+Push Registry
+    ↓
+Deploy
+    ↓
+Health Check
+    ↓
+Canary Verification
+    ↓
+Promote Release
