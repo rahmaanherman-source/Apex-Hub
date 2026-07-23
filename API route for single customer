@@ -8,4 +8,9 @@ async def get_customer(customer_id: str):
         "orderCount": 12,
         "totalSpent": 1499.00,
         "trustScore": "96%"
-    }
+    }from backend.services.model_router import router as model_router
+
+@app.post("/api/v1/ai/ask_capability")
+async def ai_ask_capability(capability: str, prompt: str):
+    result = await model_router.ask_by_capability(capability, prompt)
+    return result
