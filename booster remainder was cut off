@@ -1,0 +1,7 @@
+# =========================================================================
+echo ""
+echo "🔱 APEX HUB generated successfully."
+echo "   Next steps:"
+echo "   cd $PROJECT"
+echo "   npm install && npm run dev"
+echo ""
