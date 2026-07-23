@@ -1,0 +1,263 @@
+#!/usr/bin/env bash
+set -euo pipefail
+PROJECT="Apex-Hub"
+mkdir -p $PROJECT
+cd $PROJECT
+
+write_file() { mkdir -p "$(dirname "$1")"; cat > "$1"; }
+
+# ---------- BACKEND ----------
+write_file backend/__init__.py <<'EOF'
+EOF
+
+write_file backend/routers/__init__.py <<'EOF'
+EOF
+
+write_file backend/requirements.txt <<'EOF'
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+sqlalchemy==2.0.23
+asyncpg==0.29.0
+redis==5.0.1
+python-dotenv==1.0.0
+stripe==6.13.0
+httpx==0.25.2
+pydantic==2.5.2
+EOF
+
+write_file backend/Dockerfile <<'EOF'
+FROM python:3.11-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
+CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8000"]
+EOF
+
+write_file backend/main.py <<'EOF'
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from backend.routers import dashboard, products, orders, customers, tickets, merchant, analytics
+
+app = FastAPI(title="APEX HUB API")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.include_router(dashboard.router, prefix="/api/v1")
+app.include_router(products.router, prefix="/api/v1")
+app.include_router(orders.router, prefix="/api/v1")
+app.include_router(customers.router, prefix="/api/v1")
+app.include_router(tickets.router, prefix="/api/v1")
+app.include_router(merchant.router, prefix="/api/v1")
+app.include_router(analytics.router, prefix="/api/v1")
+
+@app.get("/health")
+async def health():
+    return {"status": "healthy"}
+EOF
+
+write_file backend/routers/dashboard.py <<'EOF'
+from fastapi import APIRouter
+router = APIRouter()
+
+@router.get("/dashboard")
+async def get_dashboard():
+    return {
+        "mrr": "$12,450",
+        "orders": 142,
+        "customers": 892,
+        "trustScore": "98.7%"
+    }
+EOF
+
+write_file backend/routers/products.py <<'EOF'
+from fastapi import APIRouter
+router = APIRouter()
+
+@router.get("/products")
+async def list_products():
+    return {
+        "items": [
+            {"id": "1", "name": "Apex Breeze Pro", "description": "VS Code extension", "price": "$49/mo"},
+            {"id": "2", "name": "Neural Beat Kit", "description": "50 royalty‑free samples", "price": "$99"}
+        ]
+    }
+EOF
+
+write_file backend/routers/orders.py <<'EOF'
+from fastapi import APIRouter
+router = APIRouter()
+
+@router.get("/orders")
+async def list_orders():
+    return {
+        "orders": [
+            {"id": "ord_1", "customer": "Maria Santos", "date": "2026-07-20", "total": 149.00},
+            {"id": "ord_2", "customer": "James K.", "date": "2026-07-19", "total": 49.00}
+        ]
+    }
+EOF
+
+write_file backend/routers/customers.py <<'EOF'
+from fastapi import APIRouter
+router = APIRouter()
+
+@router.get("/customers")
+async def list_customers():
+    return {
+        "customers": [
+            {"id": "cus_1", "name": "Maria Santos", "email": "maria@example.com"},
+            {"id": "cus_2", "name": "James K.", "email": "james@example.com"}
+        ]
+    }
+
+@router.get("/customers/{customer_id}")
+async def get_customer(customer_id: str):
+    return {
+        "id": customer_id,
+        "name": "Maria Santos",
+        "email": "maria@example.com",
+        "phone": "+52 555 123 4567",
+        "orderCount": 12,
+        "totalSpent": 1499.00,
+        "trustScore": "96%"
+    }
+EOF
+
+write_file backend/routers/tickets.py <<'EOF'
+from fastapi import APIRouter
+router = APIRouter()
+
+@router.get("/tickets")
+async def list_tickets():
+    return {
+        "tickets": [
+            {"id": "tick_1", "subject": "Billing dispute", "status": "open", "customer": "Maria Santos"},
+            {"id": "tick_2", "subject": "Integration issue", "status": "closed", "customer": "James K."}
+        ]
+    }
+EOF
+
+write_file backend/routers/merchant.py <<'EOF'
+from fastapi import APIRouter
+router = APIRouter()
+
+@router.get("/merchant/me")
+async def get_merchant():
+    return {"stripe_id": "acct_123", "balance": 2500.00}
+EOF
+
+write_file backend/routers/analytics.py <<'EOF'
+from fastapi import APIRouter
+router = APIRouter()
+
+@router.get("/analytics/revenue")
+async def revenue_history():
+    return {
+        "history": [
+            {"date": "2026-07-15", "revenue": 4200},
+            {"date": "2026-07-16", "revenue": 3800},
+            {"date": "2026-07-17", "revenue": 5100},
+            {"date": "2026-07-18", "revenue": 4900},
+            {"date": "2026-07-19", "revenue": 6200}
+        ]
+    }
+EOF
+
+# ---------- DATABASE ----------
+write_file database/init.sql <<'EOF'
+CREATE TABLE IF NOT EXISTS users (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  email TEXT UNIQUE NOT NULL,
+  name TEXT,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+CREATE TABLE IF NOT EXISTS products (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  name TEXT NOT NULL,
+  description TEXT,
+  price DECIMAL,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+CREATE TABLE IF NOT EXISTS orders (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  customer_id UUID REFERENCES users(id),
+  total DECIMAL,
+  status TEXT DEFAULT 'pending',
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+EOF
+
+# ---------- DOCKER COMPOSE ----------
+write_file docker-compose.yml <<'EOF'
+version: '3.8'
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_DB: apex
+      POSTGRES_USER: apex
+      POSTGRES_PASSWORD: apex
+    ports: ["5432:5432"]
+    volumes: [pgdata:/var/lib/postgresql/data]
+  redis:
+    image: redis:7-alpine
+    ports: ["6379:6379"]
+  qdrant:
+    image: qdrant/qdrant
+    ports: ["6333:6333"]
+  api:
+    build: ./backend
+    ports: ["8000:8000"]
+    env_file: .env
+    depends_on: [db, redis, qdrant]
+  frontend:
+    build: .
+    ports: ["3000:80"]
+    depends_on: [api]
+volumes:
+  pgdata:
+EOF
+
+# ---------- CI/CD ----------
+write_file .github/workflows/deploy.yml <<'EOF'
+name: Deploy APEX HUB
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy-netlify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm ci && npm run build
+      - uses: nwtgck/actions-netlify@v2
+        with:
+          publish-dir: dist
+          production-branch: main
+          netlify-auth-token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          netlify-site-id: ${{ secrets.NETLIFY_SITE_ID }}
+  deploy-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+      - run: |
+          gcloud builds submit ./backend --tag gcr.io/${{ secrets.GCP_PROJECT }}/apex-hub-api
+          gcloud run deploy apex-hub-api --image gcr.io/${{ secrets.GCP_PROJECT }}/apex-hub-api --platform managed
+EOF
+
+echo "Tab 3 complete. Backend, database, Docker, CI/CD generated."
