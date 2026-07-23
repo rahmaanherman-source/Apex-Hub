@@ -155,4 +155,26 @@ async def delete_customer(customer_id: str):
     # Soft-delete or archive
     return {"status": "deleted", "customer_id": customer_id}
 from backend.routers import customer
-app.include_router(customer.router, prefix="/api/v1")
+app.include_router(customer.router, prefix="/api/v1")async def ask_by_capability(self, capability: str, prompt: str) -> Dict[str, Any]:
+    """
+    Route a prompt based on capability tag.
+    Capabilities are defined in config/providers.yaml -> routing.
+    """
+    routing_cfg = config.get("routing", {})
+    provider_name = routing_cfg.get(capability)
+    if not provider_name:
+        # fallback to normal ask (local first)
+        return await self.ask(prompt)
+
+    if provider_name == "local":
+        if self.local_providers:
+            return await self._ask_local(self.local_providers[0], prompt)
+        else:
+            raise RuntimeError("No local model available for capability '{capability}'.")
+
+    # Cloud provider lookup
+    for p in self.cloud_providers:
+        if p["name"] == provider_name:
+            return await self._ask_cloud(p, prompt)
+
+    raise ValueError(f"Provider '{provider_name}' not found or not enabled for capability '{capability}'.")
