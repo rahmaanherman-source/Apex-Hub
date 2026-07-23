@@ -1,0 +1,10 @@
+flowchart LR
+    A[GitHub Push] --> B[GitHub Actions]
+    B --> C[Build Docker Image]
+    C --> D[Run Tests]
+    D --> E{Test Status}
+    E -- Pass --> F[Push to DO Registry]
+    F --> G[Deploy to Droplet]
+    G --> H[Docker Compose Up]
+    H --> I[Health Check /status]
+    E -- Fail --> K[Rollback to Previous]
