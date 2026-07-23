@@ -151,4 +151,9 @@ automation:
   body: JSON.stringify({ prompt: "Hello", use_local: true })
 });
 const data = await response.json();
-// data.answer, data.provider, data.model
+// data.answer, data.provider, data.modelrouting:
+  code: openai
+  customer_support: local
+  reasoning: anthropic
+  vision: gemini
+  embeddings: local
