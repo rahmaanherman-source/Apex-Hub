@@ -28,3 +28,63 @@ cache:
 
 database:
   postgres: postgresql://localhost:5432/apex
+ai:
+  local:
+    ollama:
+      enabled: true
+      endpoint: http://localhost:11434
+
+    lmstudio:
+      enabled: true
+      endpoint: http://localhost:1234/v1
+
+    llamacpp:
+      enabled: true
+      endpoint: http://localhost:8080
+
+    vllm:
+      enabled: true
+      endpoint: http://localhost:8001
+
+  cloud:
+    openai:
+      enabled: true
+      api_key: ${OPENAI_API_KEY}
+
+    azure_openai:
+      enabled: true
+      api_key: ${AZURE_OPENAI_API_KEY}
+      endpoint: ${AZURE_OPENAI_ENDPOINT}
+
+    anthropic:
+      enabled: true
+      api_key: ${ANTHROPIC_API_KEY}
+
+    gemini:
+      enabled: true
+      api_key: ${GEMINI_API_KEY}
+
+    openrouter:
+      enabled: true
+      api_key: ${OPENROUTER_API_KEY}
+
+storage:
+  postgres:
+    url: ${DATABASE_URL}
+
+  redis:
+    url: ${REDIS_URL}
+
+  qdrant:
+    url: ${QDRANT_URL}
+
+commerce:
+  stripe: true
+  shopify: true
+  printify: true
+  syncee: true
+
+automation:
+  github: true
+  docker: true
+  cloudflare: true
