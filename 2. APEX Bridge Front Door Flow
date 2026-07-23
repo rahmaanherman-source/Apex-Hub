@@ -1,0 +1,27 @@
+flowchart LR
+    User((User)) --> Bridge[APEX Bridge<br>Universal Front Door]
+    Bridge --> Identity[Identity & Connection]
+    Bridge --> Routing[App Routing & Navigation]
+    Bridge --> Discovery[Discovery & Catalog]
+    Identity --> Connect[APEX Connect]
+    Connect --> Stewart[STEWART Governance]
+    Connect --> Commerce[Commerce Service]
+    Connect --> Permissions[Permissions Service]
+    Routing --> Terminal[APEX Terminal]
+    Routing --> Breeze[APEX Breeze]
+    Routing --> Golden[Golden World]
+    Routing --> MAC[MAC LIFE]
+    Routing --> Studio[APEX Studio]
+    Routing --> CommerceApp[Commerce]
+    Routing --> Legacy[Legacy Engine]
+    Shared[Shared Services]:::svc --> Terminal
+    Shared --> Breeze
+    Shared --> Golden
+    Shared --> MAC
+    Shared --> Studio
+    Shared --> CommerceApp
+    Shared --> Legacy
+    Connect --- Shared
+    Stewart --- Shared
+    Commerce --- Shared
+    classDef svc fill:#B76E79,color:#fff
