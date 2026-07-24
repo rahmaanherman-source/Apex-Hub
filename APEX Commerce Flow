@@ -1,0 +1,447 @@
+commerce/
+└── stripe/
+    ├── README.md
+    ├── ARCHITECTURE.md
+    ├── CHECKOUT.md
+    ├── BILLING.md
+    ├── SUBSCRIPTIONS.md
+    ├── CONNECT.md
+    ├── WEBHOOKS.md
+    ├── PAYMENT_LINKS.md
+    ├── TAX.md
+    ├── INVOICING.md
+    ├── CUSTOMERS.md
+    ├── EVENTS.md
+    ├── SECURITY.md
+    └── GO_LIVE_CHECKLIST.md
+Customer
+     │
+     ▼
+APEX Store
+     │
+     ▼
+Stripe Checkout Session
+     │
+     ▼
+Payment Success
+     │
+     ▼
+Stripe Webhook
+     │
+     ▼
+APEX Event Bus
+     │
+     ├── Update Order
+     ├── Update Inventory
+     ├── Generate Invoice
+     ├── Send Email
+     ├── Update Analytics
+     ├── Update Customer
+     └── Trigger Automations
+# APEX
+
+> **One Slab. One Truth. One Platform.**
+
+APEX is the canonical repository for the entire APEX ecosystem. It serves as the single source of truth for platform governance, architecture, design, commerce, AI, identity, infrastructure, deployment, and implementation.
+
+Every application, service, website, API, automation, AI agent, and repository within the APEX ecosystem derives its authority from this repository.
+
+---
+
+# Mission
+
+Build a unified, intelligent platform that delivers exceptional digital experiences through simplicity, trust, automation, and measurable outcomes.
+
+APEX is designed to be:
+
+- AI-first
+- Documentation-driven
+- Specification-first
+- Event-driven
+- Cloud-native
+- Secure by default
+- Modular by design
+- Production ready
+
+---
+
+# Core Principles
+
+- One Source of Truth
+- One Design Language
+- One Architecture
+- One Identity System
+- One Commerce Platform
+- One AI Layer
+- One Governance Model
+- One Deployment Strategy
+
+No duplicated specifications.
+
+No conflicting implementations.
+
+No undocumented behavior.
+
+---
+
+# Repository Structure
+
+```text
+APEX/
+│
+├── README.md
+├── CONSTITUTION.md
+├── MASTER_BLUEPRINT.md
+├── ARCHITECTURE.md
+├── DESIGN_SYSTEM.md
+├── ROADMAP.md
+├── CHANGELOG.md
+│
+├── docs/
+├── truthgate/
+├── ai/
+├── api/
+├── database/
+├── schemas/
+├── commerce/
+├── concierge/
+├── identity/
+├── automation/
+├── analytics/
+├── infrastructure/
+├── deployment/
+├── testing/
+├── web/
+└── assets/
+```
+
+---
+
+# Canonical Authority
+
+Every specification follows this authority chain.
+
+```text
+CONSTITUTION
+        ↓
+PLATFORM STANDARD
+        ↓
+TRUTHGATE GOVERNANCE
+        ↓
+MANIFEST
+        ↓
+ARCHITECTURE
+        ↓
+DESIGN SYSTEM
+        ↓
+PRODUCT SPECIFICATIONS
+        ↓
+API CONTRACTS
+        ↓
+DATABASE
+        ↓
+IMPLEMENTATION
+        ↓
+TESTS
+        ↓
+DEPLOYMENT
+```
+
+No lower-level artifact may conflict with a higher-level authority.
+
+---
+
+# Platform Domains
+
+## Governance
+
+Defines platform law, standards, certification, auditing, compliance, and decision governance.
+
+Location:
+
+```
+truthgate/
+```
+
+---
+
+## Documentation
+
+Contains every specification that defines how APEX operates.
+
+Location:
+
+```
+docs/
+```
+
+---
+
+## Artificial Intelligence
+
+Defines:
+
+- System prompts
+- Memory architecture
+- Planning
+- Workflow engine
+- Retrieval
+- Context models
+- Safety models
+- Tool routing
+
+Location:
+
+```
+ai/
+```
+
+---
+
+## Commerce
+
+Defines:
+
+- Products
+- Orders
+- Payments
+- Billing
+- Subscriptions
+- Customers
+- Checkout
+- Stripe integration
+
+Location:
+
+```
+commerce/
+```
+
+---
+
+## Identity
+
+Defines:
+
+- Authentication
+- Authorization
+- User profiles
+- Organizations
+- Roles
+- Permissions
+
+Location:
+
+```
+identity/
+```
+
+---
+
+## APIs
+
+Contains every canonical API contract.
+
+Location:
+
+```
+api/
+```
+
+---
+
+## Database
+
+Contains:
+
+- Schema
+- Migrations
+- Views
+- Functions
+- Seeds
+- Backups
+
+Location:
+
+```
+database/
+```
+
+---
+
+## Infrastructure
+
+Defines deployment infrastructure including:
+
+- Azure
+- Docker
+- Kubernetes
+- Cloudflare
+- Terraform
+- CI/CD
+
+Location:
+
+```
+infrastructure/
+```
+
+---
+
+# Engineering Philosophy
+
+Every feature begins as documentation.
+
+Documentation becomes architecture.
+
+Architecture becomes implementation.
+
+Implementation becomes validation.
+
+Validation becomes production.
+
+Production becomes measurable improvement.
+
+---
+
+# Design Philosophy
+
+Every interface should be:
+
+- Clean
+- Fast
+- Accessible
+- Responsive
+- Predictable
+- Elegant
+
+Complexity belongs inside the platform—not in front of the user.
+
+---
+
+# AI Philosophy
+
+AI is a platform capability—not a separate product.
+
+Every AI workflow should be:
+
+- Explainable
+- Observable
+- Auditable
+- Secure
+- Context-aware
+- Human-centered
+
+---
+
+# Commerce Philosophy
+
+Commerce should feel effortless.
+
+Core capabilities include:
+
+- Catalog management
+- Checkout
+- Billing
+- Subscriptions
+- Payments
+- Customer Portal
+- Order Management
+- Analytics
+- Automation
+
+Stripe serves as the canonical payment platform for APEX.
+
+---
+
+# TruthGate
+
+TruthGate provides governance for:
+
+- Decision validation
+- Evidence verification
+- Risk assessment
+- Policy enforcement
+- Audit history
+- Certification
+- Trust scoring
+
+Every critical platform decision should be traceable.
+
+---
+
+# Development Workflow
+
+```text
+Idea
+    ↓
+Specification
+    ↓
+Architecture
+    ↓
+Review
+    ↓
+Implementation
+    ↓
+Testing
+    ↓
+Deployment
+    ↓
+Monitoring
+    ↓
+Continuous Improvement
+```
+
+---
+
+# Quality Standards
+
+Every implementation must satisfy:
+
+- Documentation complete
+- Architecture approved
+- Security reviewed
+- Accessibility compliant
+- Tests passing
+- Performance validated
+- Deployment verified
+
+---
+
+# Repository Goals
+
+This repository exists to provide:
+
+- Complete platform documentation
+- Stable architectural guidance
+- Consistent engineering standards
+- Unified governance
+- Reusable specifications
+- Long-term maintainability
+
+---
+
+# Contributing
+
+All contributions must align with the platform constitution and established standards.
+
+No implementation should precede specification.
+
+Every significant change should include:
+
+- Documentation updates
+- Architectural review
+- Testing strategy
+- Acceptance criteria
+
+---
+
+# License
+
+See `LICENSE`.
+
+---
+
+# APEX
+
+**One Slab. One Truth. One Architecture. One Platform.**
