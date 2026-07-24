@@ -1,0 +1,13 @@
+Store
+    │
+    ▼
+Stripe Checkout
+    │
+    ▼
+Webhook
+    │
+    ▼
+Orders
+Inventory
+Customers
+Invoices
