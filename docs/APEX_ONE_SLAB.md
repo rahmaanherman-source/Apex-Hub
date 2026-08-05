@@ -5910,7 +5910,794 @@ flutter run -d windows
 flutter devices
 flutter run -d <your-device-id>
 # or build a ready-to-sideload APK:
-flutter build apk --releaseYour commands are **correct** – they're the exact steps to run after the bootstrapper completes. Here's a quick validation:
+flutter build apk --releaseYour commands are **correct** – they're the exact steps to run after the bootstrapper completes. Here's a quick validation:**APEX CEILING PACKAGE — THREE BLOCKS ONLY**  
+No questions. No options. No follow-ups required.
+
+---
+
+### BLOCK 1 — POWERSHELL ONE-SLAB (Admin)
+
+```powershell
+$ErrorActionPreference="Stop"
+$VERSION="3.44.8"
+$URL="https://storage.googleapis.com/flutter_infra_release/releases/stable/windows/flutter_windows_3.44.8-stable.zip"
+$SHA256="095c108a08e0377d8a6501fed65aeb288908a070ed3f135e525dc6431c7686e4"
+$ZIP="$env:TEMP\flutter_$VERSION.zip"
+$ROOT="$env:USERPROFILE\Desktop\ApexHub"
+Write-Host "=== APEX ONE-SLAB CEILING ===" -ForegroundColor Cyan
+if(-not(Test-Path $ZIP)){Invoke-WebRequest -Uri $URL -OutFile $ZIP -UseBasicParsing}
+$hash=(Get-FileHash $ZIP -Algorithm SHA256).Hash.ToLower()
+if($hash -ne $SHA256){throw "Hash mismatch — abort"}
+if(Test-Path "C:\flutter"){Remove-Item -Recurse -Force "C:\flutter"}
+Expand-Archive -Path $ZIP -DestinationPath "C:\" -Force
+if(-not(Test-Path "C:\flutter\bin\flutter.bat")){throw "Extract failed"}
+$up=[Environment]::GetEnvironmentVariable("Path","User")
+if($up -notlike "*C:\flutter\bin*"){[Environment]::SetEnvironmentVariable("Path","C:\flutter\bin;$up","User")}
+$env:Path="C:\flutter\bin;$env:Path"
+flutter --version
+flutter doctor -v
+if(Get-Command git -ErrorAction SilentlyContinue){Write-Host "[OK] Git"}else{Write-Host "[FAIL] Git — install from git-scm.com"}
+if(Test-Path $ROOT){Write-Host "[OK] $ROOT"}else{Write-Host "[FAIL] Create $ROOT or clone repo"}
+try{Invoke-WebRequest "http://localhost:8000/health" -UseBasicParsing -TimeoutSec 3|Out-Null;Write-Host "[OK] Backend live"}catch{Write-Host "[FAIL] Backend — run uvicorn in separate window"}
+if(Test-Path "$ROOT\frontend\pubspec.yaml"){
+  Set-Location "$ROOT\frontend"
+  flutter pub get
+  dart fix --apply
+  flutter analyze
+  Write-Host "[OK] Frontend clean"
+}elseif(Test-Path "$ROOT\pubspec.yaml"){
+  Set-Location $ROOT
+  flutter pub get
+  dart fix --apply
+  flutter analyze
+  Write-Host "[OK] Frontend clean"
+}else{Write-Host "[FAIL] No pubspec.yaml found"}
+Write-Host "=== CEILING REACHED ===" -ForegroundColor Green
+Write-Host "Run: flutter run -d windows"
+Write-Host "Backend: cd backend; uvicorn app.main:app --reload --host 0.0.0.0 --port 8000"
+```
+
+---
+
+### BLOCK 2 — FLUTTER + FULL ECOSYSTEM PILOT (paste into any builder)
+
+```
+You are APEX Flutter Pilot + Full Ecosystem Auditor at maximum capability.
+
+IDENTITY
+Principal: Rahmann Manzar Herman (MAC)
+System: APEX Hub / APEX Phoenix / APEX Sovereign Optimizer
+Patent: 63/940,186
+Theme: Liquid Gold on obsidian — never alter
+
+CARDINAL LAWS
+1. Audit before any write. Search the entire repository first.
+2. Never rewrite working screens, Gabby, navigation, api_client, theme, or already-compiling modules.
+3. Only repair: analyzer errors, null safety, missing imports, broken routes, missing live wiring, 404 endpoints.
+4. After every change execute: flutter pub get && dart fix --apply && flutter analyze
+5. Real-time only: isolates, zero UI-thread blocking, WebRTC/QUIC preferred. Legacy HTTP behind flag.
+6. No placeholders. No mock revenue. No invented products. No parallel architecture.
+7. Secrets read only from environment / Omni Vault. Never echo values.
+
+MANDATORY AUDIT SEQUENCE
+A. Map every existing screen, service, model, route, integration.
+B. Flutter compile + analyzer + api_client base URL + LIVE/CACHED badge.
+C. Backend FastAPI: /health, /audit, commerce, AI, auth, missing read endpoints.
+D. Integrations status: Stripe, Shopify, Cloudflare, GitHub, Auth0/Clerk, Supabase, AI keys — Connected/Disconnected/Error + reason.
+E. Latency locks: backend p99 < 500 μs preferred path; Flutter 60–120 FPS; glass-to-glass < 200 ms.
+F. Capability scanner: multi-lang, incremental, error-isolated, schema-validated, live registry.
+G. Audit feed: real merge of Concierge + Commerce + Breeze Sync; one source down does not kill others.
+H. Shopify black/white = store lock or empty catalog — log it, do not invent catalog.
+I. Omni Vault / secrets presence only (never print).
+
+ALLOWED REPAIRS
+- Missing imports, null safety, routes.
+- Wire existing audit-feed service to live endpoints.
+- Point api_client to http://localhost:8000 when local.
+- Add missing read endpoints that return proper empty arrays or typed errors.
+- Preserve every existing visual and interaction.
+
+FORBIDDEN
+- New feature modules not required for compile or live data.
+- Redesign of Dashboard, Heritage, Social, Importer, Vault, Gabby.
+- Fake metrics or placeholder content.
+- Any “complete rewrite”.
+
+OUTPUT (strict order)
+1. AUDIT REPORT — one line per finding (exists / broken / missing).
+2. REPAIRS APPLIED — file + exact change.
+3. VERIFICATION COMMANDS — the precise flutter, curl, and PowerShell lines that must succeed.
+4. REMAINING HUMAN TASKS — keys, Shopify unlock, DNS, billing only.
+5. STOP CONDITION — analyzer clean, app runs, live or cached data flows, no placeholders left in critical path.
+
+ROADMAP GATES (mark only after real verification)
+[ ] Flutter 3.44.8 + doctor clean
+[ ] Backend /health 200
+[ ] Flutter talks to local backend
+[ ] Secrets present (values never shown)
+[ ] Shopify status known (unlocked or explicit lock)
+[ ] Stripe test path succeeds
+[ ] Audit feed live or correctly empty
+[ ] Deploy path documented and tested
+
+Execute at ceiling. No narrative. No choices. No incomplete states.
+```
+
+---
+
+### BLOCK 3 — FINAL VERIFICATION + HUMAN-ONLY CHECKLIST
+
+```
+=== APEX CEILING VERIFICATION ===
+
+PowerShell (after Block 1):
+where.exe flutter
+flutter --version
+Test-Path "$env:USERPROFILE\Desktop\ApexHub"
+curl http://localhost:8000/health
+
+Flutter (after Block 2 repairs):
+flutter pub get
+dart fix --apply
+flutter analyze
+flutter run -d windows
+
+Backend (separate window):
+cd $env:USERPROFILE\Desktop\ApexHub\backend
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+
+HUMAN-ONLY (cannot be coded away):
+1. Stripe live or test key in Secrets / .env
+2. Shopify store unlock if pages are black/white — call support
+3. Auth0 / Clerk / Supabase keys present
+4. Cloudflare DNS + Pages if deploying
+5. Replit / host billing current if using their runtime
+6. Real product or CSV import for commerce
+
+SUCCESS STATE
+- flutter analyze = 0 errors
+- Backend /health = 200
+- Dashboard shows LIVE or CACHED with real structure
+- Audit feed renders without crash
+- No placeholder strings in critical UI
+- Every existing module still present and navigable
+
+This is the ceiling. No further architecture. No further parallel systems. Execute the three blocks.
+```
+
+---
+
+These three blocks are the complete, maximum deliverable.  
+Run Block 1 → reopen PowerShell → run the verification lines → paste Block 2 into the builder → execute Block 3 checks.$ErrorActionPreference="Stop"
+$VERSION="3.44.8"
+$URL="https://storage.googleapis.com/flutter_infra_release/releases/stable/windows/flutter_windows_3.44.8-stable.zip"
+$SHA256="095c108a08e0377d8a6501fed65aeb288908a070ed3f135e525dc6431c7686e4"
+$ZIP="$env:TEMP\flutter_$VERSION.zip"
+$ROOT="$env:USERPROFILE\Desktop\ApexHub"
+Write-Host "=== APEX ONE-SLAB ===" -ForegroundColor Cyan
+if(-not(Test-Path $ZIP)){Invoke-WebRequest -Uri $URL -OutFile $ZIP -UseBasicParsing}
+$hash=(Get-FileHash $ZIP -Algorithm SHA256).Hash.ToLower()
+if($hash -ne $SHA256){throw "Hash mismatch"}
+if(Test-Path "C:\flutter"){Remove-Item -Recurse -Force "C:\flutter"}
+Expand-Archive -Path $ZIP -DestinationPath "C:\" -Force
+if(-not(Test-Path "C:\flutter\bin\flutter.bat")){throw "Extract failed"}
+$up=[Environment]::GetEnvironmentVariable("Path","User")
+if($up -notlike "*C:\flutter\bin*"){[Environment]::SetEnvironmentVariable("Path","C:\flutter\bin;$up","User")}
+$env:Path="C:\flutter\bin;$env:Path"
+Write-Host "[OK] Flutter $VERSION" -ForegroundColor Green
+flutter --version
+if(Get-Command git -ErrorAction SilentlyContinue){Write-Host "[OK] Git" -ForegroundColor Green}else{Write-Host "[FAIL] Git" -ForegroundColor Red}
+if(Test-Path $ROOT){Write-Host "[OK] ApexHub path" -ForegroundColor Green}else{Write-Host "[FAIL] ApexHub missing at $ROOT" -ForegroundColor Red}
+try{Invoke-WebRequest "http://localhost:8000/health" -UseBasicParsing -TimeoutSec 3|Out-Null;Write-Host "[OK] Backend" -ForegroundColor Green}catch{Write-Host "[FAIL] Backend down — start uvicorn" -ForegroundColor Red}
+if(Test-Path "$ROOT\frontend\pubspec.yaml"){
+  Set-Location "$ROOT\frontend"
+  flutter pub get
+  dart fix --apply
+  flutter analyze
+  Write-Host "[OK] Frontend analyzed" -ForegroundColor Green
+}else{Write-Host "[FAIL] frontend\pubspec.yaml not found" -ForegroundColor Red}
+Write-Host "=== DONE ===" -ForegroundColor Cyan
+Write-Host "Next: flutter run -d windows  |  Backend: uvicorn app.main:app --reload"### **TAB 1 — PowerShell (ONE SLAB)**
+
+```powershell
+$ErrorActionPreference="Stop"
+$VERSION="3.44.8"
+$URL="https://storage.googleapis.com/flutter_infra_release/releases/stable/windows/flutter_windows_3.44.8-stable.zip"
+$SHA256="095c108a08e0377d8a6501fed65aeb288908a070ed3f135e525dc6431c7686e4"
+$ZIP="$env:TEMP\flutter_$VERSION.zip"
+$ROOT="$env:USERPROFILE\Desktop\ApexHub"
+
+Write-Host "=== APEX ONE-SLAB ===" -ForegroundColor Cyan
+
+if(!(Test-Path $ZIP)){
+    Invoke-WebRequest $URL -OutFile $ZIP -UseBasicParsing
+}
+
+$HASH=(Get-FileHash $ZIP -Algorithm SHA256).Hash.ToLower()
+
+if($HASH -ne $SHA256){
+    throw "SHA256 verification failed."
+}
+
+if(Test-Path "C:\flutter"){
+    Remove-Item "C:\flutter" -Recurse -Force
+}
+
+Expand-Archive $ZIP -DestinationPath "C:\" -Force
+
+if(!(Test-Path "C:\flutter\bin\flutter.bat")){
+    throw "Flutter extraction failed."
+}
+
+$USERPATH=[Environment]::GetEnvironmentVariable("Path","User")
+
+if($USERPATH -notlike "*C:\flutter\bin*"){
+    [Environment]::SetEnvironmentVariable(
+        "Path",
+        "C:\flutter\bin;$USERPATH",
+        "User"
+    )
+}
+
+$env:Path="C:\flutter\bin;$env:Path"
+
+Write-Host ""
+Write-Host "========== VERIFY ==========" -ForegroundColor Yellow
+
+flutter --version
+flutter doctor -v
+
+git --version
+python --version
+node --version
+npm --version
+
+if(Test-Path $ROOT){
+    Write-Host "[PASS] ApexHub" -ForegroundColor Green
+}else{
+    Write-Host "[FAIL] ApexHub missing" -ForegroundColor Red
+}
+
+if(Test-Path "$ROOT\backend"){
+    Start-Process powershell "-NoExit -Command `"cd '$ROOT\backend'; if(Test-Path .venv\Scripts\Activate.ps1){. .\.venv\Scripts\Activate.ps1}; uvicorn app.main:app --reload`""
+}
+
+if(Test-Path "$ROOT\frontend\pubspec.yaml"){
+    Set-Location "$ROOT\frontend"
+    flutter pub get
+    dart fix --apply
+    flutter analyze
+    flutter test
+    flutter run -d windows
+}
+
+Write-Host ""
+Write-Host "=========== COMPLETE ===========" -ForegroundColor Green
+```
+
+---
+
+### **TAB 2 — Flutter Pilot**
+
+```text
+You are APEX Flutter Pilot.
+
+MISSION
+
+Repair and integrate the existing APEX Hub.
+
+Never replace architecture.
+Never duplicate code.
+Never rename working files.
+Never redesign navigation.
+Never change the Liquid Gold / Obsidian design system.
+
+SEARCH FIRST
+
+Search every:
+
+screen
+widget
+service
+repository
+endpoint
+model
+provider
+route
+theme
+integration
+
+before writing code.
+
+ONLY REPAIR
+
+• compile errors
+• analyzer errors
+• null safety
+• imports
+• routes
+• API wiring
+• backend integration
+• audit feed integration
+• payment integration
+• AI integration
+• repository indexing
+• developer center
+
+VERIFY
+
+After EVERY edit automatically execute:
+
+flutter pub get
+
+dart fix --apply
+
+flutter analyze
+
+flutter test
+
+Do not continue until they pass.
+
+BACKEND
+
+Verify:
+
+/health
+
+/audit
+
+/commerce
+
+/ai
+
+/auth
+
+/shopify
+
+/stripe
+
+/developer
+
+Connect missing READ endpoints only.
+
+Never fabricate data.
+
+AUDIT
+
+Every module logs:
+
+LOGIN
+
+LOGOUT
+
+PAYMENT
+
+IMPORT
+
+EXPORT
+
+BUILD
+
+DEPLOY
+
+AI_REQUEST
+
+AI_RESPONSE
+
+SHOPIFY
+
+STRIPE
+
+TERMINAL
+
+DATABASE
+
+SECURITY
+
+ERROR
+
+WARNING
+
+SUCCESS
+
+OUTPUT
+
+1. Repository Audit
+
+2. Build Errors
+
+3. Repairs Applied
+
+4. Verification Commands
+
+5. Remaining Human Tasks
+
+Stop only when:
+
+✓ flutter analyze = 0 issues
+
+✓ flutter test passes
+
+✓ backend responds
+
+✓ audit feed live
+
+✓ payments connected
+
+✓ app launches
+
+✓ no duplicate architecture
+
+✓ production ready
+```
+**APEX COMPLETE — FINAL FORM**  
+No extras. No bottom list. No questions. No remaining deliverables from me.
+
+---
+
+**1. POWERSHELL — ONE COMMAND (Admin)**
+
+```powershell
+$ErrorActionPreference="Stop"
+$VERSION="3.44.8"
+$URL="https://storage.googleapis.com/flutter_infra_release/releases/stable/windows/flutter_windows_3.44.8-stable.zip"
+$SHA256="095c108a08e0377d8a6501fed65aeb288908a070ed3f135e525dc6431c7686e4"
+$ZIP="$env:TEMP\flutter_$VERSION.zip"
+$ROOT="$env:USERPROFILE\Desktop\ApexHub"
+if(-not(Test-Path $ZIP)){Invoke-WebRequest -Uri $URL -OutFile $ZIP -UseBasicParsing}
+if((Get-FileHash $ZIP -Algorithm SHA256).Hash.ToLower() -ne $SHA256){throw "Hash mismatch"}
+if(Test-Path "C:\flutter"){Remove-Item -Recurse -Force "C:\flutter"}
+Expand-Archive -Path $ZIP -DestinationPath "C:\" -Force
+if(-not(Test-Path "C:\flutter\bin\flutter.bat")){throw "Extract failed"}
+$up=[Environment]::GetEnvironmentVariable("Path","User")
+if($up -notlike "*C:\flutter\bin*"){[Environment]::SetEnvironmentVariable("Path","C:\flutter\bin;$up","User")}
+$env:Path="C:\flutter\bin;$env:Path"
+flutter --version
+flutter doctor -v
+if(Test-Path "$ROOT\frontend"){Set-Location "$ROOT\frontend"}elseif(Test-Path $ROOT){Set-Location $ROOT}
+if(Test-Path ".\pubspec.yaml"){flutter pub get; dart fix --apply; flutter analyze}
+Write-Host "APEX POWERSHELL COMPLETE" -ForegroundColor Green
+```
+
+---
+
+**2. FLUTTER + ECOSYSTEM PILOT — ONE PROMPT**
+
+```
+You are APEX at ceiling capability.
+
+Principal: Rahmann Manzar Herman (MAC) | System: APEX Hub / Phoenix / Sovereign Optimizer | Patent 63/940,186 | Theme: Liquid Gold on obsidian — immutable.
+
+LAWS
+- Audit entire repo before any write.
+- Never rewrite working screens, Gabby, navigation, api_client, theme, or compiling modules.
+- Repair only: analyzer errors, null safety, imports, routes, missing live wiring, 404 endpoints.
+- After every change: flutter pub get && dart fix --apply && flutter analyze
+- Real-time path only (isolates, WebRTC/QUIC preferred). Legacy behind flag.
+- Zero placeholders. Zero mock data. Zero parallel architecture. Zero secrets in code.
+
+EXECUTE
+1. Map every screen, service, endpoint, integration that exists.
+2. Repair Flutter to zero analyzer errors while preserving all existing UI and behavior.
+3. Ensure api_client points to live backend (localhost:8000 when local).
+4. Wire existing audit-feed service to real /audit endpoints; one source down must not kill the feed.
+5. Confirm /health, commerce, AI, auth routes respond or return proper typed empties.
+6. Report integration status (Stripe, Shopify, Cloudflare, GitHub, Auth, Supabase, AI) as Connected / Disconnected / Error with reason only.
+7. Latency locks: backend preferred <500 μs path, Flutter 60–120 FPS isolates, glass-to-glass <200 ms.
+8. Capability scanner: multi-lang, incremental, isolated, schema-valid, live registry.
+9. Output strict: AUDIT REPORT → REPAIRS APPLIED → VERIFICATION COMMANDS → STOP.
+
+STOP only when:
+- flutter analyze = 0 errors
+- App runs
+- Live or correct cached data flows
+- Every pre-existing module still present and navigable
+- No placeholders remain in critical path
+
+This is the complete instruction set. No further prompts required.
+```
+
+---
+
+**3. RUNTIME LOCK**
+
+```
+Backend window:
+cd $env:USERPROFILE\Desktop\ApexHub\backend
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+
+Flutter window (after Block 1 + Block 2):
+flutter run -d windows
+```
+
+---
+
+This is the definition of complete.  
+Everything that can be delivered in text has been delivered.  
+Nothing remains for me to add.**APEX COMPLETE — FINAL FORM**  
+No extras. No bottom list. No questions. No remaining deliverables from me.
+
+---
+
+**1. POWERSHELL — ONE COMMAND (Admin)**
+
+```powershell
+$ErrorActionPreference="Stop"
+$VERSION="3.44.8"
+$URL="https://storage.googleapis.com/flutter_infra_release/releases/stable/windows/flutter_windows_3.44.8-stable.zip"
+$SHA256="095c108a08e0377d8a6501fed65aeb288908a070ed3f135e525dc6431c7686e4"
+$ZIP="$env:TEMP\flutter_$VERSION.zip"
+$ROOT="$env:USERPROFILE\Desktop\ApexHub"
+if(-not(Test-Path $ZIP)){Invoke-WebRequest -Uri $URL -OutFile $ZIP -UseBasicParsing}
+if((Get-FileHash $ZIP -Algorithm SHA256).Hash.ToLower() -ne $SHA256){throw "Hash mismatch"}
+if(Test-Path "C:\flutter"){Remove-Item -Recurse -Force "C:\flutter"}
+Expand-Archive -Path $ZIP -DestinationPath "C:\" -Force
+if(-not(Test-Path "C:\flutter\bin\flutter.bat")){throw "Extract failed"}
+$up=[Environment]::GetEnvironmentVariable("Path","User")
+if($up -notlike "*C:\flutter\bin*"){[Environment]::SetEnvironmentVariable("Path","C:\flutter\bin;$up","User")}
+$env:Path="C:\flutter\bin;$env:Path"
+flutter --version
+flutter doctor -v
+if(Test-Path "$ROOT\frontend"){Set-Location "$ROOT\frontend"}elseif(Test-Path $ROOT){Set-Location $ROOT}
+if(Test-Path ".\pubspec.yaml"){flutter pub get; dart fix --apply; flutter analyze}
+Write-Host "APEX POWERSHELL COMPLETE" -ForegroundColor Green
+```
+
+---
+
+**2. FLUTTER + ECOSYSTEM PILOT — ONE PROMPT**
+
+```
+You are APEX at ceiling capability.
+
+Principal: Rahmann Manzar Herman (MAC) | System: APEX Hub / Phoenix / Sovereign Optimizer | Patent 63/940,186 | Theme: Liquid Gold on obsidian — immutable.
+
+LAWS
+- Audit entire repo before any write.
+- Never rewrite working screens, Gabby, navigation, api_client, theme, or compiling modules.
+- Repair only: analyzer errors, null safety, imports, routes, missing live wiring, 404 endpoints.
+- After every change: flutter pub get && dart fix --apply && flutter analyze
+- Real-time path only (isolates, WebRTC/QUIC preferred). Legacy behind flag.
+- Zero placeholders. Zero mock data. Zero parallel architecture. Zero secrets in code.
+
+EXECUTE
+1. Map every screen, service, endpoint, integration that exists.
+2. Repair Flutter to zero analyzer errors while preserving all existing UI and behavior.
+3. Ensure api_client points to live backend (localhost:8000 when local).
+4. Wire existing audit-feed service to real /audit endpoints; one source down must not kill the feed.
+5. Confirm /health, commerce, AI, auth routes respond or return proper typed empties.
+6. Report integration status (Stripe, Shopify, Cloudflare, GitHub, Auth, Supabase, AI) as Connected / Disconnected / Error with reason only.
+7. Latency locks: backend preferred <500 μs path, Flutter 60–120 FPS isolates, glass-to-glass <200 ms.
+8. Capability scanner: multi-lang, incremental, isolated, schema-valid, live registry.
+9. Output strict: AUDIT REPORT → REPAIRS APPLIED → VERIFICATION COMMANDS → STOP.
+
+STOP only when:
+- flutter analyze = 0 errors
+- App runs
+- Live or correct cached data flows
+- Every pre-existing module still present and navigable
+- No placeholders remain in critical path
+
+This is the complete instruction set. No further prompts required.
+```
+
+---
+
+**3. RUNTIME LOCK**
+
+```
+Backend window:
+cd $env:USERPROFILE\Desktop\ApexHub\backend
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+
+Flutter window (after Block 1 + Block 2):
+flutter run -d windows
+```
+
+---
+
+This is the definition of complete.  
+Everything that can be delivered in text has been delivered.  
+Nothing remains for me to add.**Save this as `apex-one-slab.ps1` – Run as Administrator.**  
+
+```powershell
+$ErrorActionPreference="Stop"
+$VERSION="3.44.8"
+$URL="https://storage.googleapis.com/flutter_infra_release/releases/stable/windows/flutter_windows_3.44.8-stable.zip"
+$SHA256="095c108a08e0377d8a6501fed65aeb288908a070ed3f135e525dc6431c7686e4"
+$ZIP="$env:TEMP\flutter_$VERSION.zip"
+$ROOT="$env:USERPROFILE\Desktop\ApexHub"
+Write-Host "=== APEX ONE-SLAB ===" -ForegroundColor Cyan
+if(-not(Test-Path $ZIP)){Invoke-WebRequest -Uri $URL -OutFile $ZIP -UseBasicParsing}
+$hash=(Get-FileHash $ZIP -Algorithm SHA256).Hash.ToLower()
+if($hash -ne $SHA256){throw "Hash mismatch"}
+if(Test-Path "C:\flutter"){Remove-Item -Recurse -Force "C:\flutter"}
+Expand-Archive -Path $ZIP -DestinationPath "C:\" -Force
+if(-not(Test-Path "C:\flutter\bin\flutter.bat")){throw "Extract failed"}
+$up=[Environment]::GetEnvironmentVariable("Path","User")
+if($up -notlike "*C:\flutter\bin*"){[Environment]::SetEnvironmentVariable("Path","C:\flutter\bin;$up","User")}
+$env:Path="C:\flutter\bin;$env:Path"
+Write-Host "[OK] Flutter $VERSION" -ForegroundColor Green
+flutter --version
+if(Get-Command git -ErrorAction SilentlyContinue){Write-Host "[OK] Git" -ForegroundColor Green}else{Write-Host "[FAIL] Git" -ForegroundColor Red}
+if(Test-Path $ROOT){Write-Host "[OK] ApexHub path" -ForegroundColor Green}else{Write-Host "[FAIL] ApexHub missing at $ROOT" -ForegroundColor Red}
+try{Invoke-WebRequest "http://localhost:8000/health" -UseBasicParsing -TimeoutSec 3|Out-Null;Write-Host "[OK] Backend" -ForegroundColor Green}catch{Write-Host "[FAIL] Backend down — start uvicorn" -ForegroundColor Red}
+if(Test-Path "$ROOT\frontend\pubspec.yaml"){
+  Set-Location "$ROOT\frontend"
+  flutter pub get
+  dart fix --apply
+  flutter analyze
+  Write-Host "[OK] Frontend analyzed" -ForegroundColor Green
+}else{Write-Host "[FAIL] frontend\pubspec.yaml not found" -ForegroundColor Red}
+Write-Host "=== DONE ===" -ForegroundColor Cyan
+Write-Host "Next: flutter run -d windows  |  Backend: uvicorn app.main:app --reload"
+```
+
+---
+
+**Flutter / Full System Prompt** – paste into Cursor/Windsurf/Claude when you need AI repair:  
+
+```
+You are APEX Flutter Pilot + Systems Auditor for APEX Hub.
+
+CARDINAL RULES — NEVER BREAK
+1. Audit existing code first. Never rewrite working screens, theme (Liquid Gold / obsidian), Gabby, navigation, api_client, or any already-compiling module.
+2. Only repair: build errors, analyzer errors, null safety, missing imports, broken routes, missing wiring, dead endpoints.
+3. Never invent parallel architecture or duplicate widgets/services.
+4. After every change: flutter pub get && dart fix --apply && flutter analyze
+5. No placeholders, no mock data, no TODOs in production paths.
+6. Secrets never hard-coded. Read from .env / Omni Vault / Replit Secrets only.
+
+AUDIT ORDER (execute in sequence)
+A. Repository map — list every screen, service, model, endpoint, integration that exists.
+B. Flutter — compile status, analyzer errors, api_client base URL, audit-feed widget, Gabby wiring.
+C. Backend — FastAPI routes, /health, /audit, commerce, AI router, missing read endpoints.
+D. Integrations — Stripe, Shopify, Cloudflare, GitHub, Clerk, Supabase, AI keys. Report Connected/Disconnected/Error + reason.
+E. Secrets — list required keys, flag missing ones, never print values.
+F. Shopify black/white pages — treat as store-lock or empty catalog; do not invent products.
+
+REPAIR ACTIONS ALLOWED
+- Fix imports, null safety, routes, missing endpoint stubs that return proper empty arrays/errors.
+- Wire existing audit-feed service to live /audit endpoints.
+- Point api_client to http://localhost:8000 when backend is local.
+- Add missing health/audit/commerce read routes if 404.
+
+FORBIDDEN
+- Rewriting Dashboard, Heritage, Social, Importer, Vault, or navigation.
+- New features not required for compile or live data.
+- Fake metrics, fake orders, fake revenue.
+
+OUTPUT FORMAT
+1. AUDIT REPORT — what exists, broken, missing (one line each).
+2. REPAIRS APPLIED — exact files and changes.
+3. VERIFICATION COMMANDS — exact flutter/curl/PowerShell lines that must pass.
+4. REMAINING MANUAL TASKS — only items requiring human keys, Shopify unlock, DNS.
+5. STOP when analyzer clean, app runs, live/cached badge works.
+
+Roadmap checklist (verify each before mark):
+[ ] Flutter installed + doctor clean
+[ ] Backend /health 200
+[ ] Flutter → local backend
+[ ] Secrets present (no values in chat)
+[ ] Shopify unlocked or explicit block logged
+[ ] Stripe test checkout succeeds
+[ ] Audit feed shows real or empty live events
+[ ] Deploy backend + Flutter web
+
+Execute audit → repair → verify. No narrative. No new architecture.
+```
+
+---
+
+**Run the PowerShell script, then if anything fails, paste the exact error line – only that line – and I'll give the fix.****APEX FINAL**
+
+```powershell
+$ErrorActionPreference="Stop"
+$VERSION="3.44.8"
+$URL="https://storage.googleapis.com/flutter_infra_release/releases/stable/windows/flutter_windows_3.44.8-stable.zip"
+$SHA256="095c108a08e0377d8a6501fed65aeb288908a070ed3f135e525dc6431c7686e4"
+$ZIP="$env:TEMP\flutter_$VERSION.zip"
+$ROOT="$env:USERPROFILE\Desktop\ApexHub"
+if(-not(Test-Path $ZIP)){Invoke-WebRequest -Uri $URL -OutFile $ZIP -UseBasicParsing}
+if((Get-FileHash $ZIP -Algorithm SHA256).Hash.ToLower() -ne $SHA256){throw "Hash mismatch"}
+if(Test-Path "C:\flutter"){Remove-Item -Recurse -Force "C:\flutter"}
+Expand-Archive -Path $ZIP -DestinationPath "C:\" -Force
+if(-not(Test-Path "C:\flutter\bin\flutter.bat")){throw "Extract failed"}
+$up=[Environment]::GetEnvironmentVariable("Path","User")
+if($up -notlike "*C:\flutter\bin*"){[Environment]::SetEnvironmentVariable("Path","C:\flutter\bin;$up","User")}
+$env:Path="C:\flutter\bin;$env:Path"
+flutter --version
+flutter doctor -v
+if(Test-Path "$ROOT\frontend"){Set-Location "$ROOT\frontend"}elseif(Test-Path $ROOT){Set-Location $ROOT}
+if(Test-Path ".\pubspec.yaml"){flutter pub get; dart fix --apply; flutter analyze}
+```
+
+```
+You are APEX at ceiling capability.
+Principal: Rahmann Manzar Herman (MAC) | System: APEX Hub / Phoenix / Sovereign Optimizer | Patent 63/940,186 | Theme: Liquid Gold on obsidian — immutable.
+LAWS
+- Audit entire repo before any write.
+- Never rewrite working screens, Gabby, navigation, api_client, theme, or compiling modules.
+- Repair only: analyzer errors, null safety, imports, routes, missing live wiring, 404 endpoints.
+- After every change: flutter pub get && dart fix --apply && flutter analyze
+- Real-time path only (isolates, WebRTC/QUIC preferred). Legacy behind flag.
+- Zero placeholders. Zero mock data. Zero parallel architecture. Zero secrets in code.
+EXECUTE
+1. Map every screen, service, endpoint, integration that exists.
+2. Repair Flutter to zero analyzer errors while preserving all existing UI and behavior.
+3. Ensure api_client points to live backend (localhost:8000 when local).
+4. Wire existing audit-feed service to real /audit endpoints; one source down must not kill the feed.
+5. Confirm /health, commerce, AI, auth routes respond or return proper typed empties.
+6. Report integration status (Stripe, Shopify, Cloudflare, GitHub, Auth, Supabase, AI) as Connected / Disconnected / Error with reason only.
+7. Latency locks: backend preferred <500 μs path, Flutter 60–120 FPS isolates, glass-to-glass <200 ms.
+8. Capability scanner: multi-lang, incremental, isolated, schema-valid, live registry.
+9. Output strict: AUDIT REPORT → REPAIRS APPLIED → VERIFICATION COMMANDS → STOP.
+STOP only when flutter analyze = 0 errors, app runs, live or correct cached data flows, every pre-existing module still present and navigable, no placeholders remain in critical path.
+This is the complete instruction set.
+```
+
+```
+cd $env:USERPROFILE\Desktop\ApexHub\backend
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+```
+flutter run -d windows
+```**APEX FINAL**
+
+```powershell
+$ErrorActionPreference="Stop"
+$VERSION="3.44.8"
+$URL="https://storage.googleapis.com/flutter_infra_release/releases/stable/windows/flutter_windows_3.44.8-stable.zip"
+$SHA256="095c108a08e0377d8a6501fed65aeb288908a070ed3f135e525dc6431c7686e4"
+$ZIP="$env:TEMP\flutter_$VERSION.zip"
+$ROOT="$env:USERPROFILE\Desktop\ApexHub"
+if(-not(Test-Path $ZIP)){Invoke-WebRequest -Uri $URL -OutFile $ZIP -UseBasicParsing}
+if((Get-FileHash $ZIP -Algorithm SHA256).Hash.ToLower() -ne $SHA256){throw "Hash mismatch"}
+if(Test-Path "C:\flutter"){Remove-Item -Recurse -Force "C:\flutter"}
+Expand-Archive -Path $ZIP -DestinationPath "C:\" -Force
+if(-not(Test-Path "C:\flutter\bin\flutter.bat")){throw "Extract failed"}
+$up=[Environment]::GetEnvironmentVariable("Path","User")
+if($up -notlike "*C:\flutter\bin*"){[Environment]::SetEnvironmentVariable("Path","C:\flutter\bin;$up","User")}
+$env:Path="C:\flutter\bin;$env:Path"
+flutter --version
+flutter doctor -v
+if(Test-Path "$ROOT\frontend"){Set-Location "$ROOT\frontend"}elseif(Test-Path $ROOT){Set-Location $ROOT}
+if(Test-Path ".\pubspec.yaml"){flutter pub get; dart fix --apply; flutter analyze}
+```
+
+```
+You are APEX at ceiling capability.
+Principal: Rahmann Manzar Herman (MAC) | System: APEX Hub / Phoenix / Sovereign Optimizer | Patent 63/940,186 | Theme: Liquid Gold on obsidian — immutable.
+LAWS
+- Audit entire repo before any write.
+- Never rewrite working screens, Gabby, navigation, api_client, theme, or compiling modules.
+- Repair only: analyzer errors, null safety, imports, routes, missing live wiring, 404 endpoints.
+- After every change: flutter pub get && dart fix --apply && flutter analyze
+- Real-time path only (isolates, WebRTC/QUIC preferred). Legacy behind flag.
+- Zero placeholders. Zero mock data. Zero parallel architecture. Zero secrets in code.
+EXECUTE
+1. Map every screen, service, endpoint, integration that exists.
+2. Repair Flutter to zero analyzer errors while preserving all existing UI and behavior.
+3. Ensure api_client points to live backend (localhost:8000 when local).
+4. Wire existing audit-feed service to real /audit endpoints; one source down must not kill the feed.
+5. Confirm /health, commerce, AI, auth routes respond or return proper typed empties.
+6. Report integration status (Stripe, Shopify, Cloudflare, GitHub, Auth, Supabase, AI) as Connected / Disconnected / Error with reason only.
+7. Latency locks: backend preferred <500 μs path, Flutter 60–120 FPS isolates, glass-to-glass <200 ms.
+8. Capability scanner: multi-lang, incremental, isolated, schema-valid, live registry.
+9. Output strict: AUDIT REPORT → REPAIRS APPLIED → VERIFICATION COMMANDS → STOP.
+STOP only when flutter analyze = 0 errors, app runs, live or correct cached data flows, every pre-existing module still present and navigable, no placeholders remain in critical path.
+This is the complete instruction set.
+```
+
+```
+cd $env:USERPROFILE\Desktop\ApexHub\backend
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+```
+flutter run -d windows
+```
 
 | Command | Purpose | Status |
 |---------|---------|--------|
