@@ -1,0 +1,37 @@
+provider: google-cloud
+status_model:
+  - DISCOVERED
+  - AVAILABLE
+  - AUTHORIZED
+  - CONNECTED
+  - HEALTHY
+  - EXECUTABLE
+  - VERIFIED
+capabilities:
+  - bigquery
+  - vertex-ai
+  - cloud-run
+  - cloud-storage
+  - pub-sub
+  - secret-manager
+  - iam
+source:
+  console: https://console.cloud.google.com/
+  bigquery_docs: https://cloud.google.com/bigquery/docs
+security:
+  credential_policy: workload_identity_or_vault_reference
+  never_store: [service_account_private_keys, oauth_refresh_tokens, raw_credentials]
+verification:
+  required_before_green:
+    - project_discovery
+    - api_enabled_check
+    - iam_scope_check
+    - service_health_check
+    - executable_test
+    - evidence_record
+revenue_priority: P0
+notes:
+  - BigQuery is an analytics/data capability, not proof of a connected APEX integration.
+  - Cloud Run is a deployment/execution capability and must be verified by a live endpoint check.
+  - Vertex AI is an AI execution capability and must be verified by an actual authorized request.
+  - Google Cloud account ownership must not be inferred from a repository reference.
