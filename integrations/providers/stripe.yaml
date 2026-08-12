@@ -1,0 +1,36 @@
+provider: stripe
+status_model:
+  - DISCOVERED
+  - AVAILABLE
+  - AUTHORIZED
+  - CONNECTED
+  - HEALTHY
+  - EXECUTABLE
+  - VERIFIED
+source:
+  dashboard: https://dashboard.stripe.com/settings/user
+  official_docs: https://stripe.com/docs
+purpose:
+  - payments
+  - products
+  - prices
+  - checkout
+  - subscriptions
+  - refunds
+  - webhooks
+  - revenue_reporting
+security:
+  credential_policy: vault_reference_only
+  never_store: [secret_keys, webhook_signing_secrets, raw_credentials]
+verification:
+  required_before_green:
+    - authenticated_account_observation
+    - api_capability_check
+    - webhook_endpoint_check
+    - checkout_test_transaction
+    - event_delivery_check
+    - revenue_record_match
+revenue_priority: P0
+notes:
+  - Do not claim Stripe is connected merely because Stripe code exists in a repository.
+  - A successful checkout and verified event/revenue record are required for production-green status.
