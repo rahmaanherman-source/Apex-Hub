@@ -39,16 +39,17 @@ export function canMonetizeHead(head: OctopusHead): boolean {
   return head.category === 'SELL_NOW' && head.monetizationReady && head.standaloneCapable;
 }
 
-/**
- * Revenue must originate from provider evidence. Never call this with UI/model text
- * as proof of payment. Test/simulated events are deliberately not counted as revenue.
- */
-export function buildRevenueEvidence(input: Omit<RevenueEvidence, 'evidenceHash'> & { rawEvidence: string }): RevenueEvidence {
+/** Revenue must originate from provider evidence. Test/simulated events are never revenue. */
+export async function buildRevenueEvidence(
+  input: Omit<RevenueEvidence, 'evidenceHash'> & { rawEvidence: string }
+): Promise<RevenueEvidence> {
   if (!input.verified || input.source !== 'PROVIDER') {
     throw new Error('NO_FAKE_GREEN: revenue evidence must be provider-observed and verified.');
   }
 
-  const bytes = new TextEncoder().encode(input.rawEvidence);
+  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(input.rawEvidence));
+  const evidenceHash = `sha256:${Array.from(new Uint8Array(digest), b => b.toString(16).padStart(2, '0')).join('')}`;
+
   return {
     eventId: input.eventId,
     headId: input.headId,
@@ -56,17 +57,9 @@ export function buildRevenueEvidence(input: Omit<RevenueEvidence, 'evidenceHash'
     amountInCents: input.amountInCents,
     currency: input.currency,
     entityId: input.entityId,
-    evidenceHash: `sha256:${toHex(bytes)}`,
+    evidenceHash,
     observedAt: input.observedAt,
     verified: true,
     source: 'PROVIDER'
   };
-}
-
-// Deterministic browser-safe placeholder hash adapter. Production integrations should
-// replace this with the platform/server cryptographic SHA-256 implementation.
-function toHex(bytes: Uint8Array): string {
-  let out = '';
-  for (const b of bytes) out += b.toString(16).padStart(2, '0');
-  return out;
 }
