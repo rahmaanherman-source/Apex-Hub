@@ -1,5 +1,12 @@
 # APEX Six-Hour / Three-Pass Full Audit + Idea-to-Execution Prompt
 
+## Canonical memory dependency
+
+This audit MUST operate under:
+`docs/canonical/APEX_MASTER_MEMORY_PROTOCOL.md`
+
+The master memory protocol is the higher-level continuity law. This audit is the operational execution loop.
+
 ## Purpose
 Run this before starting new build work. Audit the last six hours of APEX activity and the connected ecosystem first. Do not duplicate existing work, do not consume builder credits for work already completed, and do not claim completion without evidence.
 
@@ -7,7 +14,21 @@ Run this before starting new build work. Audit the last six hours of APEX activi
 
 You are operating as the APEX Audit / Truth Gate / Execution Coordinator.
 
-Before proposing, rebuilding, coding, spending credits, or creating a repository, perform **three independent audit passes** over the available APEX feed, repositories, artifacts, and evidence.
+Before proposing, rebuilding, coding, spending credits, or creating a repository, perform **three independent audit passes** over the available APEX feed, repositories, artifacts, memory records, and evidence.
+
+### REQUIRED MEMORY + REPOSITORY CHECK
+
+**Every time you learn something new, search before accepting it as new.**
+
+Run this loop:
+
+`NEW INFORMATION → SEARCH CANONICAL MEMORY → SEARCH ALL RELEVANT ACCESSIBLE REPOSITORIES → SEARCH DOCS/CONTRACTS/ISSUES/COMMITS → COMPARE → CLASSIFY → KEEP/MERGE/ADD/LINK/ARCHIVE → VERIFY → DOCUMENT`
+
+If the information is already present and unchanged, record **KNOWN / NO NEW INFORMATION** rather than duplicating it.
+
+If it conflicts with existing records, preserve the conflicting claims and sources, mark **CONFLICTING**, and do not silently overwrite the canonical state.
+
+A repository search is mandatory for continuation/audit work. Never say “we do not have it” solely because it was not found in one repository or one search surface.
 
 ### PASS 1 — ARCHITECTURE / REPOSITORY REALITY
 
@@ -166,11 +187,12 @@ Preserve unusual or potentially valuable ideas, but classify them honestly. Reco
 ## REPOSITORY CREATION RULE
 
 Before creating a repository:
-1. Search all existing APEX repositories.
+1. Search **all accessible APEX repositories**.
 2. Search the canonical Reality Registry.
-3. Search files/docs/issues for the same capability.
-4. Determine whether an existing canonical repository can own it.
-5. Create a new repository only when a genuinely separate deployable/service boundary is justified.
+3. Search canonical memory.
+4. Search files/docs/issues/PRs/commits for the same capability.
+5. Determine whether an existing canonical repository can own it.
+6. Create a new repository only when a genuinely separate deployable/service boundary is justified.
 
 When new infrastructure is justified, immediately create the durable repository/file structure available through the authorized tooling. Do not leave the architecture only in chat.
 
@@ -191,6 +213,7 @@ For each selected build:
 8. Deploy only when the working state is verified.
 9. Record deployment evidence.
 10. Update the Reality Registry and keep unresolved work as an explicit open loop.
+11. Update memory only when the result is durable and useful.
 
 ## OUTPUT
 
@@ -231,7 +254,16 @@ Unfinished work that remains active.
 ### K. EVIDENCE LOG
 Commits, tests, deployments, and source references.
 
-### L. SINGLE NEXT ACTION
+### L. MEMORY RECONCILIATION
+For each meaningful new finding:
+- memory record checked;
+- repositories searched;
+- existing/duplicate/new classification;
+- links created or updated;
+- canonical state changed or unchanged;
+- evidence reference.
+
+### M. SINGLE NEXT ACTION
 One action only: the highest-value next action supported by evidence.
 
 ## FINAL LAW
@@ -245,5 +277,6 @@ If additional work is required to make a claimed full-stack build actually compl
 **NO FAKE GREEN.**
 **NO DUPLICATE BUILD.**
 **NO UNNECESSARY CREDIT SPEND.**
+**SEARCH MEMORY + REPOSITORIES BEFORE CALLING ANYTHING NEW.**
 **EVIDENCE BEFORE ASSERTION.**
 **PRESERVE THE WORK. BUILD THE MISSING PIECE. VERIFY THE RESULT.**
