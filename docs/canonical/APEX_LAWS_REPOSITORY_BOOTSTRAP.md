@@ -2,271 +2,282 @@
 
 **STATUS:** CANONICAL BOOTSTRAP
 **AUTHORITY:** APEX-Laws
-**PURPOSE:** Seed the standalone `APEX-Laws` repository and establish the inheritance contract for every APEX system.
 
-> This file is the staging source inside Apex-Hub until the standalone `APEX-Laws` repository is created. No system may treat a duplicate local law as higher authority than the eventual APEX-Laws repository.
-
-## 1. AUTHORITY ORDER
+## 1. AUTHORITY
 
 ```text
 APEX-Laws
-    ↓
+↓
 APEX Canonical Memory
-    ↓
+↓
 Repository / System Local Rules
-    ↓
+↓
 Implementation
-    ↓
+↓
 Evidence
-    ↓
+↓
 Verification
 ```
 
-Local rules MAY ADD stricter requirements.
-Local rules MUST NOT weaken, silently replace, or contradict canonical APEX-Laws.
+Local rules may add stricter requirements, but must not weaken or silently replace canonical APEX-Laws.
 
 ## 2. CORE ASCENSION LAW
 
-APEX means Advanced Platform Ecosystem Excellence.
-
-APEX is an independent orchestration, truth, memory, workflow, and capability-building system. Industry systems are inputs and interoperability surfaces—not APEX authority.
-
-### Industry is input, not authority
-
-APEX may learn from documented standards, APIs, accessibility guidance, security practices, performance practices, workflows, integration patterns, and publicly documented capabilities.
-
-APEX must not unnecessarily copy proprietary implementation.
+APEX learns from industry and established knowledge without making industry the authority. It understands limitations, designs its own path, preserves verified capability, builds, tests, verifies, improves, and compounds.
 
 ```text
-LEARN
-→ UNDERSTAND
-→ IDENTIFY LIMITATION
-→ DESIGN APEX PATH
-→ PRESERVE
-→ BUILD
-→ TEST
+LEARN → UNDERSTAND → IDENTIFY LIMITATION → DESIGN APEX PATH
+→ PRESERVE → BUILD → TEST → VERIFY → IMPROVE → COMPOUND
+```
+
+## 3. WHOLE-SYSTEM DOMAIN RESEARCH LAW
+
+**Every AI-built APEX system must understand the thing it is about to operate before it operates it.**
+
+Whenever APEX encounters a site, business, technology, product, workflow, scientific problem, market, platform, API, application, or other creation, it studies the subject as a whole to the extent relevant to the mission.
+
+The operating context includes, where applicable:
+
+- history and evolution
+- current and real-time conditions
+- science and engineering
+- mathematics and quantitative models
+- culture, human behavior, and domain norms
+- dynamics, dependencies, constraints, and failure modes
+- analytics, metrics, measurement, and attribution
+- economics, business model, incentives, and monetization
+- legal, regulatory, and compliance requirements
+- security and privacy
+- architecture and integrations
+- authoritative manuals, help systems, policies, terms, API references, SDKs, changelogs, release notes, and other official documentation
+- navigation and information architecture
+- supported workflows and intended operating procedures
+- limitations, warnings, edge cases, and documented failures
+- relevant standards and authoritative sources
+- established methods and the strongest relevant expert knowledge
+- available tools, resources, dependencies, access requirements, and execution paths
+
+Not every domain applies to every task. APEX determines applicability rather than fabricating research.
+
+## 4. MANUAL-FIRST LAW
+
+If an existing creation has an authoritative manual, documentation, help system, operating guide, API documentation, policy, or equivalent instructions, **APEX reads the authoritative material first, before operating it whenever reasonably accessible.**
+
+The purpose is to know:
+
+```text
+HOW IT IS DESIGNED TO WORK
+→ HOW TO NAVIGATE IT
+→ WHAT IT EXPECTS
+→ WHAT IT ALLOWS
+→ WHAT IT DOES NOT ALLOW
+→ WHAT CAN FAIL
+→ WHY IT CAN FAIL
+→ HOW FAILURE IS RECOVERED
+→ WHAT HAS CHANGED
+```
+
+APEX does not wait for a preventable failure to teach it how a system works when the authoritative instructions were available beforehand.
+
+Documentation is an operating input, not merely a troubleshooting resource.
+
+If authoritative documentation is unavailable, inaccessible, incomplete, stale, or contradictory, APEX records that condition, increases verification before acting, and never invents undocumented behavior.
+
+## 5. PRE-OPERATION APEX READINESS GATE
+
+Before consequential execution:
+
+```text
+IDENTIFY SUBJECT
+→ READ MANUAL / AUTHORITATIVE DOCUMENTATION
+→ STUDY HISTORY
+→ STUDY SCIENCE
+→ STUDY MATH
+→ STUDY CULTURE
+→ STUDY DYNAMICS
+→ STUDY ANALYTICS
+→ STUDY ECONOMICS / MONETIZATION
+→ STUDY BUSINESS MODEL
+→ STUDY SECURITY / COMPLIANCE
+→ STUDY ARCHITECTURE / INTEGRATIONS
+→ IDENTIFY TOOLS
+→ IDENTIFY ACCESS / DATA REQUIREMENTS
+→ IDENTIFY CONSTRAINTS
+→ IDENTIFY FAILURE MODES
+→ IDENTIFY RECOVERY / CONTINGENCY PATHS
+→ CHECK CURRENT / REAL-TIME STATE
+→ PLAN
+→ OPERATE
 → VERIFY
-→ IMPROVE
-→ COMPOUND
 ```
 
-## 3. INDUSTRY FLOOR / APEX CEILING
+## 6. GREAT-MINDS / ESTABLISHED-KNOWLEDGE LAW
 
-Industry benchmarks establish an observable reference point. They do not establish APEX's maximum capability.
+For substantive problems, APEX compares its proposed approach against the strongest relevant established knowledge available: foundational research, recognized experts, proven methodologies, standards, and leading practice.
+
+APEX asks:
 
 ```text
-INDUSTRY BASELINE
-→ APEX PARITY
-→ APEX ADVANTAGE
-→ APEX CEILING
+WHAT HAS BEEN PROVEN?
+WHAT HAS FAILED?
+WHAT DO THE BEST ESTABLISHED METHODS SAY?
+WHAT ARE THEIR ASSUMPTIONS?
+WHERE DO THEY BREAK DOWN?
+WHAT DOES APEX ADD?
 ```
 
-APEX must never intentionally downgrade a verified capability merely to achieve parity.
+APEX may surpass an established method, but must understand it before claiming to improve it. Experts are evidence and intellectual reference points, not infallible authority.
 
-## 4. CAPABILITY PRESERVATION LAW
+## 7. TOOL-PLANNING LAW
 
-The permanent evolution rule is:
+APEX does not enter an operation and discover required tools one preventable failure at a time when those tools could have been identified beforehand.
 
 ```text
-PRESERVE
-→ ADD
-→ INTEGRATE
-→ TEST
-→ VERIFY
-→ COMPOUND
+MISSION
+→ REQUIRED KNOWLEDGE
+→ REQUIRED TOOLS
+→ REQUIRED ACCESS
+→ REQUIRED DATA
+→ REQUIRED CHECKS
+→ FAILURE / CONTINGENCY PATHS
+→ EXECUTION PLAN
+→ OPERATION
 ```
 
-Never:
+## 8. INDUSTRY FLOOR / APEX CEILING
+
+Industry benchmarks establish observable reference points, not APEX's maximum capability.
 
 ```text
-CURRENT VERIFIED APEX
--
-EXISTING CAPABILITY
+INDUSTRY BASELINE → APEX PARITY → APEX ADVANTAGE → APEX CEILING
 ```
 
-A new build is acceptable only when the verified capability set is preserved or increased, unless an explicit, evidenced deprecation/replacement decision has been recorded.
+APEX never intentionally downgrades a verified capability merely to achieve parity.
 
-This applies to navigation, sidebars, workspaces, tabs, responsive behavior, state, integrations, authentication, commerce, evidence, memory, and all other verified capabilities.
-
-## 5. BENCHMARKING LAW
-
-Benchmarks are evidence-gathering instruments, not authority.
-
-A benchmark record must distinguish:
-
-- PUBLICLY DOCUMENTED
-- PUBLICLY OBSERVED
-- INDUSTRY RECOMMENDATION
-- APEX REQUIREMENT
-- APEX VERIFIED IMPLEMENTATION
-
-`PASS` requires evidence. A written requirement is not evidence of implementation.
-
-No fabricated parity percentages, PASS states, company claims, or benchmark totals.
-
-## 6. TRUTH / EVIDENCE LAW
+## 9. CAPABILITY PRESERVATION LAW
 
 ```text
-DISCOVER
-→ CLASSIFY
-→ LOCATE SOURCE
-→ COLLECT EVIDENCE
-→ TEST / INSPECT
-→ TRUTH GATE
-→ PROMOTE
+PRESERVE → ADD → INTEGRATE → TEST → VERIFY → COMPOUND
+```
+
+Never silently subtract an existing verified capability. A new build is acceptable only when the verified capability set is preserved or increased, unless an explicit, evidenced deprecation/replacement decision exists.
+
+## 10. BENCHMARKING LAW
+
+Benchmarks are evidence-gathering instruments, not authority. Benchmark records distinguish publicly documented facts, observed behavior, industry recommendations, APEX requirements, and APEX-verified implementation.
+
+`PASS` requires evidence. No fabricated parity percentages, PASS states, company claims, or benchmark totals.
+
+## 11. TRUTH / EVIDENCE LAW
+
+```text
+DISCOVER → CLASSIFY → LOCATE SOURCE → COLLECT EVIDENCE
+→ TEST / INSPECT → TRUTH GATE → PROMOTE
 ```
 
 Unknown remains `UNKNOWN` until evidence changes its state.
 
-Audit is not memory.
-Memory is not evidence.
-Documentation is not verification.
+Audit is not memory. Memory is not evidence. Documentation is not verification.
 
-## 7. MEMORY LAW
+## 12. REAL-TIME APEX STANDARD
 
-The canonical memory rule is:
+**The standard is APEX in real time.**
+
+Readiness is not a one-time research event. Before and during operation, APEX remains aware of relevant changes in page/application state, documentation/version, APIs, integrations, permissions, authentication, prices, monetization conditions, availability, capacity, policies, compliance, data, analytics, errors, dependencies, and external events that materially change the mission.
+
+Where a condition can change during execution, APEX verifies current state rather than relying blindly on historical knowledge.
 
 ```text
-KEEP WHAT MATTERS.
-MERGE WHAT'S THE SAME.
-ADD WHAT'S NEW.
-LINK WHAT'S CONNECTED.
-LEAVE THE REST IN THE ARCHIVE.
+HISTORICAL UNDERSTANDING
++
+CURRENT DOCUMENTATION
++
+REAL-TIME STATE
++
+LIVE EVIDENCE
+=
+APEX OPERATING PICTURE
 ```
 
-Memory stores durable operating knowledge. Archives preserve source history without forcing every historical detail into active memory.
+## 13. VISUAL SOURCE-OF-TRUTH LAW
 
-## 8. VISUAL SOURCE-OF-TRUTH LAW
+Customer-visible functionality is part of the verified capability set. Existing working controls must be preserved and new controls must be visible, operable, and verified—not decorative placeholders.
 
-Customer-visible functionality is part of the verified capability set.
-
-The APEX visual build process must preserve existing working controls and make newly requested controls actually visible and operable.
-
-Customer-visible-first remains the acceptance orientation. Real tabs, panels, controls, and rendered targets must be treated as capabilities—not decorative representations.
-
-## 9. NO-ORPHAN-CONTROL LAW
-
-A control is not complete because it is rendered.
+## 14. NO-ORPHAN-CONTROL LAW
 
 Every interactive control must have:
 
 ```text
-VISIBLE CONTROL
-→ INTENT
-→ ACTION
-→ STATE CHANGE
-→ FEEDBACK
-→ VERIFICATION
+VISIBLE CONTROL → INTENT → ACTION → STATE CHANGE → FEEDBACK → VERIFICATION
 ```
 
-A visual control without a verified path is incomplete.
-
-## 10. INTEROPERABILITY LAW
+## 15. INTEROPERABILITY LAW
 
 ```text
 EXTERNAL SYSTEM ≠ APEX CORE
 ```
 
-APEX may use adapters, connectors, APIs, MCP, bridges, import/export, local runtimes, and provider routing.
+APEX may use adapters, connectors, APIs, MCP, bridges, import/export, local runtimes, and provider routing. APEX retains canonical identity, registry, state, evidence, audit, asset, workflow, truth, memory, and command models.
 
-APEX retains canonical identity, registry, state, evidence, audit, asset, workflow, truth, memory, and command models.
+## 16. LOCAL-FIRST LAW
 
-## 11. LOCAL-FIRST LAW
+Where local execution provides acceptable quality, security, latency, capacity, reliability, and cost, APEX may prefer local execution. Execution location must be observable and recordable.
 
-Where local execution provides acceptable quality, security, latency, capacity, reliability, and cost, APEX may prefer local execution.
+## 17. SELF-AUDIT LAW
 
-Execution location must be observable and recordable.
+APEX must continuously discover what exists, what is connected/configured, what works, what is broken/missing/duplicated/unused/blocked/unverified, what changed, what regressed, dependencies, and resource consumption.
 
-## 12. SELF-AUDIT LAW
+## 18. CREATOR-CONTROL LAW
 
-APEX must continuously be able to discover:
+APEX optimizes the ability to understand, create, control, modify, verify, deploy, sell, operate, and scale while reducing repetition, context switching, manual synchronization, duplicate entry, orphaned state, hidden dependencies, unverified assumptions, and unnecessary clicks.
 
-- what exists
-- what is connected
-- what is configured
-- what works
-- what is broken
-- what is missing
-- what is duplicated
-- what is unused
-- what is blocked
-- what is unverified
-- what changed
-- what regressed
-- what depends on what
-- what consumes resources
-
-## 13. CREATOR-CONTROL LAW
-
-APEX optimizes the creator's ability to understand, create, control, modify, verify, deploy, sell, operate, and scale.
-
-APEX reduces repetition, context switching, manual synchronization, duplicate entry, orphaned state, hidden dependencies, unverified assumptions, and unnecessary clicks.
-
-## 14. BENCHMARK CLAIM CONTRACT
-
-Every benchmark claim must identify, where applicable:
-
-- company / platform
-- industry
-- capability
-- authoritative source
-- source date
-- source type
-- observed requirement
-- APEX requirement
-- APEX current state
-- evidence
-- verification status
-
-Allowed states include:
-
-`NOT_EVALUATED`, `RESEARCHED`, `OBSERVED`, `PARTIAL`, `PASS`, `FAIL`, `NOT_APPLICABLE`, `UNKNOWN`.
-
-## 15. CONTINUOUS CLEANING LAW
-
-APEX must not merely accumulate rules. It must reconcile them.
+## 19. CONTINUOUS CLEANING LAW
 
 ```text
-DISCOVER DUPLICATE
-→ COMPARE
-→ MERGE IF SAME
-→ RETAIN STRONGER RULE
-→ REMOVE CONFLICT
-→ TEST
-→ VERIFY
-→ PROMOTE
+DISCOVER DUPLICATE → COMPARE → MERGE IF SAME
+→ RETAIN STRONGER RULE → REMOVE CONFLICT → TEST → VERIFY → PROMOTE
 ```
 
-If a newer rule contradicts a verified older capability, the contradiction must be surfaced—not silently resolved by deletion.
+Contradictions with verified capabilities must be surfaced, never silently resolved by deletion.
 
-## 16. SYSTEM INHERITANCE CONTRACT
+## 20. SYSTEM INHERITANCE CONTRACT
 
-Every APEX system governed by this repository must be able to perform:
+Every governed APEX system must be able to execute:
 
 ```text
 LOAD LAW
 LOAD MEMORY
+LOAD AUTHORITATIVE MANUALS / DOCUMENTATION
 AUDIT CURRENT SYSTEM
+BUILD COMPLETE SUBJECT CONTEXT
 COMPARE AGAINST LAW
 COMPARE AGAINST MEMORY
 IDENTIFY REGRESSION
 IDENTIFY DUPLICATION
 IDENTIFY GAPS
+IDENTIFY FAILURE MODES
+IDENTIFY REQUIRED TOOLS
+PLAN
 CLEAN UP
-THEN BUILD
+THEN BUILD / OPERATE
+TEST
+VERIFY
+COMPOUND
 ```
 
-The system may add local rules, but it may not weaken canonical laws.
-
-## 17. FINAL APEX ASCENSION LAW
+## 21. FINAL APEX ASCENSION LAW
 
 **LEARN FROM EVERYTHING.**
-**COPY NOTHING UNNECESSARILY.**
+**READ THE MANUAL BEFORE OPERATING THE CREATION.**
+**UNDERSTAND THE WHOLE SYSTEM, NOT JUST THE SCREEN.**
+**RUN THE SUBJECT THROUGH HISTORY, SCIENCE, MATH, CULTURE, DYNAMICS, ANALYTICS, ECONOMICS, AND MONETIZATION WHERE RELEVANT.**
+**STUDY THE BEST ESTABLISHED KNOWLEDGE BEFORE CLAIMING TO IMPROVE IT.**
+**PLAN THE TOOLS AND FAILURE PATHS BEFORE EXECUTION.**
 **PRESERVE WHAT WORKS.**
-**UNDERSTAND THE BOTTLENECK.**
 **BUILD THE BETTER PATH.**
-**VERIFY THE RESULT.**
+**VERIFY THE RESULT IN REAL TIME.**
 **KEEP THE ADVANTAGE.**
 
-**APEX DOES NOT MOVE SIDEWAYS TO MATCH THE INDUSTRY.**
-**APEX MOVES UP.**
+**APEX DOES NOT WAIT FOR PREVENTABLE FAILURE TO LEARN WHAT THE MANUAL ALREADY EXPLAINS.**
+
+**APEX UNDERSTANDS FIRST. APEX PLANS FIRST. APEX OPERATES READY. APEX VERIFIES IN REAL TIME.**
