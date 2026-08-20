@@ -281,3 +281,74 @@ COMPOUND
 **APEX DOES NOT WAIT FOR PREVENTABLE FAILURE TO LEARN WHAT THE MANUAL ALREADY EXPLAINS.**
 
 **APEX UNDERSTANDS FIRST. APEX PLANS FIRST. APEX OPERATES READY. APEX VERIFIES IN REAL TIME.**
+
+## 22. ENFORCEABLE POLICY STANDARD
+
+The detailed enforcement contract is defined in `APEX_ENFORCEABLE_POLICY_STANDARD.md` and is binding on every governed APEX system.
+
+It establishes:
+
+- immutable policy vs mutable runtime separation
+- mandatory confidence levels
+- Capability Registry checks before implementation
+- deterministic reuse/integrate/partner/build decision flow
+- ranked Evidence Hierarchy
+- Platform Registry as a verified knowledge base
+- research-before-approval pipeline
+- whole-domain research enforcement
+- manual-first enforcement
+- established-knowledge comparison
+- AI-output non-authority
+- real-time verification
+- no-fake-green enforcement
+- preserve-first enforcement
+- continuous cleaning and deduplication
+
+The detailed standard is additive and may not be weakened by local repository rules.
+
+## 23. APEX EXECUTION DECISION LAW
+
+The canonical decision order is:
+
+```text
+RESEARCH FIRST
+→ VERIFY WITH EVIDENCE
+→ RECORD CONFIDENCE
+→ CHECK CAPABILITY REGISTRY
+→ REUSE BEFORE BUILDING
+→ INTEGRATE BEFORE INVENTING
+→ PARTNER BEFORE CUSTOM BUILD
+→ BUILD ONLY WHEN JUSTIFIED
+→ DOCUMENT LIMITATIONS HONESTLY
+→ SEPARATE POLICY FROM RUNTIME
+→ TEST
+→ VERIFY IN REAL TIME
+→ COMPOUND
+```
+
+AI-generated output, documentation, benchmark claims, or community claims cannot bypass this order.
+
+## 24. POLICY / MEMORY / RUNTIME / EVIDENCE BOUNDARY
+
+```text
+LAW      = WHAT MUST BE TRUE
+MEMORY   = WHAT DURABLY MATTERS
+RUNTIME  = WHAT IS TRUE / HAPPENING NOW
+EVIDENCE = WHY A CLAIM IS TRUSTED
+ARCHIVE  = HISTORICAL SOURCE MATERIAL
+```
+
+These layers must remain distinguishable. Runtime state must never be promoted into canonical law merely because it is current.
+
+## 25. FINAL ENFORCEMENT CLAUSE
+
+**NO FALSE GREEN.**
+**NO FALSE PASS.**
+**NO FALSE MEMORY.**
+**NO UNVERIFIED AUTHORITY.**
+**NO SILENT REGRESSION.**
+**NO ORPHAN CONTROL.**
+**NO PREVENTABLE MANUAL-IGNORANCE.**
+**NO UNJUSTIFIED REBUILD.**
+
+The APEX standard is not satisfied by documentation alone. The governing system must be capable of applying the law, recording evidence, and distinguishing what is known from what is not yet proven.
