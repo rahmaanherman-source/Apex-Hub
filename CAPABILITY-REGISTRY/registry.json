@@ -1,0 +1,43 @@
+{
+  "version": "1.1",
+  "last_updated": "2026-08-22T00:00:00Z",
+  "capabilities": [
+    {
+      "id": "APEX-CAP-001",
+      "name": "APEX Hub repository verification pipeline",
+      "type": "platform",
+      "owner": "APEX",
+      "source": "https://github.com/rahmaanherman-source/Apex-Hub",
+      "integration_status": "repository-confirmed",
+      "operational_status": "CONFIGURED",
+      "test_status": "CANDIDATE",
+      "apex_status": "CANDIDATE",
+      "evidence": [],
+      "verification_check": ["python", "skills_validate.py"]
+    },
+    {
+      "id": "APEX-CAP-002",
+      "name": "Agent Skills specification",
+      "type": "skill",
+      "owner": "Agent Skills",
+      "source": "https://agentskills.io/specification.md",
+      "integration_status": "specification-confirmed",
+      "operational_status": "UNKNOWN",
+      "test_status": "RESEARCHED",
+      "apex_status": "CANDIDATE",
+      "evidence": []
+    },
+    {
+      "id": "APEX-CAP-003",
+      "name": "OpenAI API",
+      "type": "api",
+      "owner": "OpenAI",
+      "source": "https://api.openai.com",
+      "integration_status": "not-live-verified-by-this-registry",
+      "operational_status": "UNKNOWN",
+      "test_status": "RESEARCHED",
+      "apex_status": "CANDIDATE",
+      "evidence": []
+    }
+  ]
+}
