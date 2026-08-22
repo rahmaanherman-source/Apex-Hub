@@ -9,6 +9,10 @@
 - `APEX_ENFORCEABLE_POLICY_STANDARD.md` — enforceable research, evidence, capability, confidence, runtime-boundary, and non-fabrication rules
 - `APEX_CANONICAL_MEMORY_SLAB.md` — durable memory baseline
 
+## Verified reference index
+
+- `docs/operations/APEX_VERIFIED_PLATFORM_REFERENCE_INDEX.md` — direct evidence inventory of connected APEX-related platform/project records. Existence, working capability, production readiness, and runtime health remain separate evidence states.
+
 ## Required standalone repository structure
 
 ```text
