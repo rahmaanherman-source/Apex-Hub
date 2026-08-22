@@ -316,3 +316,28 @@ Never remember a green state that has not been earned by evidence.
 18. Keep runtime state out of canonical law and durable memory.
 19. Never treat AI-generated output as canonical evidence without independent verification.
 20. Compound verified improvements into the next baseline.
+
+## SECTION 56: PROVIDER INDEPENDENCE & SOVEREIGN PORTABILITY
+
+### ARTICLE 56.1 — SOVEREIGN CONTROL PLANE LAW
+
+APEX strictly owns the control plane. External providers (Google, OpenAI, Anthropic, Vercel, Stripe, GitHub, Manus, Lovable, Supabase, Cloudflare, etc.) are replaceable capability adapters—never permanent architectural masters or single points of failure.
+
+### ARTICLE 56.2 — THE 10 IMMUTABLE OPERATING RULES
+
+1. **Sovereign Ownership:** Build what APEX needs to own. Retain full custody of core logic, state models, data definitions, and control structures.
+2. **Intelligent Reuse:** Reuse existing external capabilities and APIs when technically and economically superior to custom builds, but keep them behind APEX-defined interfaces.
+3. **Local-First Execution:** Execute locally on sovereign hardware (CPU/GPU/DSP via Ollama, WASM, and WebGL) whenever technically and economically justified.
+4. **Pragmatic Cloud Escalation:** Escalate to external cloud infrastructure only when the workload strictly exceeds local hardware capabilities or yields material operational leverage.
+5. **Adapter Classification:** Treat every third-party cloud service strictly as an adapter on the APEX Integration Bus—never as the backbone or core runtime.
+6. **Standardized Contracts:** Enforce that all provider integrations terminate behind strict, standardized APEX capability contracts (`canExecute`, `execute`, `verifyConnection`, `credentialRef`).
+7. **Zero-Downtime Hot-Swapping:** Maintain hot-swappable replacement and fallback paths for every critical provider in the ecosystem.
+8. **Credential & Policy Isolation:** Never bind permanent core architecture to provider-specific token limits, quotas, proprietary SDKs, or price fluctuations.
+9. **Interoperability from Strength:** Partner and federate from a position of sovereign interoperability, never structural dependence.
+10. **Revenue & Creation Continuity:** No external provider downtime, rate-limit, account review, or pricing modification shall ever take the APEX core creation engine, user data, or revenue collection pipeline offline.
+
+### ARTICLE 56.3 — VERIFICATION INVARIANT
+
+`PROVIDER_EXISTS ≠ CAPABILITY_ONLINE ≠ VERIFIED_STATUS`
+
+No provider badge shall ever be marked `VERIFIED` without live cryptographic or round-trip execution evidence.
