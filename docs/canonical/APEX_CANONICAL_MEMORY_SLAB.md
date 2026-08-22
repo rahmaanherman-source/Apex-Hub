@@ -341,3 +341,58 @@ APEX strictly owns the control plane. External providers (Google, OpenAI, Anthro
 `PROVIDER_EXISTS ≠ CAPABILITY_ONLINE ≠ VERIFIED_STATUS`
 
 No provider badge shall ever be marked `VERIFIED` without live cryptographic or round-trip execution evidence.
+
+## SECTION 57: APEX PLATFORM REGISTRY & MANUAL PROMOTION GATE
+
+The APEX Platform Registry is the lightweight index of external places where APEX projects, applications, designs, infrastructure, data, or integrations may exist. It is a reference map, not a duplicate of every project's documentation.
+
+Each registry entry records only the durable facts needed to find and understand the asset:
+
+```text
+PLATFORM
+→ PROJECT / APP
+→ LOCATION / IDENTIFIER
+→ PURPOSE
+→ APEX ROLE
+→ CONNECTION / ACCESS STATE
+→ EVIDENCE REFERENCE
+→ VERIFICATION STATE
+→ DEPENDENCIES / RELATIONSHIPS
+```
+
+### ARTICLE 57.1 — NO-FAKE-GREEN PROMOTION GATE
+
+A platform or application may appear in the **Verified Manual Index** only after its existence/accessibility and the claimed APEX relationship have been independently checked against available authoritative or live platform evidence.
+
+```text
+DISCOVERED
+→ INSPECTED
+→ EVIDENCE COLLECTED
+→ VERIFIED
+→ PROMOTED TO MANUAL INDEX
+```
+
+If verification is incomplete:
+
+```text
+DO NOT MARK VERIFIED
+DO NOT PROMOTE AS VERIFIED
+DO NOT INVENT DETAILS
+RETAIN AS UNVERIFIED / PENDING IN THE REGISTRY
+```
+
+### ARTICLE 57.2 — MANUAL IS DOWNSTREAM OF VERIFICATION
+
+The manual is not the source of truth for whether an external application exists. The platform evidence is. The manual is a human-readable reference generated from verified registry entries.
+
+Therefore:
+
+`REGISTRY EVIDENCE → VERIFIED STATE → MANUAL INDEX`
+
+Never:
+
+`MANUAL CLAIM → ASSUMED VERIFICATION`
+
+### ARTICLE 57.3 — LIGHTWEIGHT REFERENCE RULE
+
+The Platform Registry must not become another giant book. Store the minimum durable reference necessary to locate the real system and understand its role. Detailed implementation, runtime state, screenshots, logs, credentials, and changing provider conditions remain in their authoritative systems or appropriate evidence/archive layers.
