@@ -31,7 +31,10 @@
               }
             }
           },
-          "verification_check": {"type": "array", "items": {"type": "string", "minItems": 1}}
+          "verification_check": {
+            "type": "array",
+            "items": {"type": "string", "minLength": 1}
+          }
         }
       }
     }
