@@ -1,0 +1,18 @@
+name: APEX Skills Verification
+on:
+  push:
+    branches: [main, 'apex/**']
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate Agent Skills
+        run: python skills_validate.py
+      - name: Run executable verification checks
+        run: python runtime/verification_engine.py
