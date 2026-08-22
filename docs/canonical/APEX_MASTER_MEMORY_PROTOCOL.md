@@ -270,6 +270,36 @@ When memory grows:
 
 Target: **maximum signal, minimum noise, zero loss of critical knowledge.**
 
+## SECTION XVII: ARCHITECTURAL SOVEREIGNTY & HYBRID ROUTING MATRIX
+
+```text
+┌──────────────────────────────────────────────┐
+│      APEX SOVEREIGN CONTROL PLANE (OWNED)    │
+│   Principal: Rahmann Manzar Herman (Mac Titan)│
+│   Vault Gatekeeper • Truth Gate • Gabby Hub  │
+└──────────────────────┬───────────────────────┘
+                       │
+          [TASK ROUTING DECISION ENGINE]
+                       │
+        ┌──────────────┴───────────────┐
+        ▼                              ▼
+┌───────────────────────────┐  ┌───────────────────────────┐
+│   TIER 1: LOCAL SOVEREIGN │  │   TIER 2: CLOUD ADAPTERS  │
+│   (Zero-Cost / Offline)   │  │   (Dynamic / Replaceable) │
+│   • Ollama (qwen/llama)   │  │   • Google Vertex / Studio│
+│   • Local WebGL / WebGPU  │  │   • Vercel AI Gateway     │
+│   • Web Audio DSP Worklet │  │   • OpenAI / Anthropic    │
+│   • SQLite Local Vault DB │  │   • Stripe / Supabase     │
+└───────────────────────────┘  └───────────────────────────┘
+```
+
+### Fallback & Portability Protocol
+
+- If a Cloud Adapter degrades or disconnects → seamlessly fall back to local sovereign nodes or alternate verified adapters without disrupting active projects, character state, or workspace sessions.
+- Control Plane, Vault storage, and Merkle audit histories remain 100% operational in air-gapped local mode.
+- External providers are capability adapters, not architectural authorities.
+- Critical provider integrations must have a defined replacement or fallback path before they are treated as non-single-point-of-failure infrastructure.
+
 ## 20. REQUIRED AUDIT RESPONSE
 
 When asked to audit/continue APEX, report:
