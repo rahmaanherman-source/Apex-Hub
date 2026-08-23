@@ -1,35 +1,10 @@
 # APEX Hub — Canonicality Control Record
 
-**Status:** NOT VERIFIED / CANONICALITY NOT GRANTED
+**Status:** CONTROLLED — CANONICALITY PENDING VERIFICATION
 **Repository:** `rahmaanherman-source/Apex-Hub`
 **Branch:** `main`
 
-This file previously described a target repository structure under the label `Canonical Repository`. That label is now explicitly treated as a **declaration**, not proof that the current `main` tree conforms to the structure.
-
-## Declared target structure
-
-```text
-apex-hub/
-├── app/
-├── components/
-├── modules/
-│   ├── commerce/
-│   ├── studio/
-│   ├── godspeed/
-│   ├── goldenworld/
-│   ├── identity/
-│   ├── omnivault/
-│   ├── bulkconnect/
-│   ├── ai/
-│   └── command/
-├── lib/
-├── public/
-├── styles/
-├── docs/
-├── package.json
-├── next.config.ts
-└── tsconfig.json
-```
+This file is a control record, not proof of canonicality.
 
 ## Evidence rule
 
@@ -43,10 +18,12 @@ Canonicality requires:
 4. deployment read-back where deployment is claimed;
 5. explicit identity/authority binding.
 
-Until those conditions are demonstrated, this repository remains **CANONICALITY UNRESOLVED**.
+Until those conditions are demonstrated, this repository remains **CANONICALITY PENDING VERIFICATION**.
 
-## Current audit consequence
+## Enforcement
 
-The existence of this file must not be interpreted as proof that the target structure is implemented. The global NO FAKE GREEN audit records the source/declaration mismatch as an active finding until reconciliation is completed.
+No filename, documentation page, architecture diagram, generated UI, or declaration may be treated as proof of execution or deployment.
+
+The canonical-root control and reconciliation requirements are maintained in `docs/CANONICAL_APEX_ROOT.md`.
 
 **NO SELF-ASSERTED GREEN.**
