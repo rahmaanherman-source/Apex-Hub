@@ -1,0 +1,49 @@
+version: "1"
+name: apex-agent-access
+
+identity:
+  human_idp: github
+  infrastructure_enforcement: teleport
+
+secrets:
+  canonical_store: apex-vault
+  agent_delivery: credential-reference-only
+  raw_secret_exposure: forbidden
+
+authorization:
+  gatekeeper: required
+  default: deny
+  high_risk_requires_human_approval: true
+
+providers:
+  - name: google
+    credential_ref: GOOGLE_API_KEY
+  - name: openai
+    credential_ref: OPENAI_API_KEY
+  - name: azure-openai
+    credential_ref: AZURE_OPENAI_API_KEY
+    endpoint_ref: AZURE_OPENAI_ENDPOINT
+  - name: anthropic
+    credential_ref: ANTHROPIC_API_KEY
+  - name: github
+    credential_ref: GITHUB_AUTH
+  - name: stripe
+    credential_ref: STRIPE_API_KEY
+  - name: gcp
+    credential_ref: GCP_CREDENTIALS
+  - name: apple
+    credential_ref: APPLE_PRIVATE_KEY
+  - name: unreal
+    credential_ref: UNREAL_API_KEY
+  - name: blender
+    credential_ref: BLENDER_API_KEY
+
+verification:
+  required_after_write: true
+  evidence_required: true
+  states:
+    - DEFINED
+    - CONFIGURED
+    - CONNECTED
+    - TESTED
+    - VERIFIED
