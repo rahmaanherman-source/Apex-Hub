@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "status": "DEFINED",
+  "note": "SI base quantities; numerical IDs are internal identifiers, not physical constants.",
+  "primitives": [
+    {"id":"LENGTH","name":"Length","symbol":"L","si_unit":"m","dimension_vector":[1,0,0,0,0,0,0]},
+    {"id":"MASS","name":"Mass","symbol":"M","si_unit":"kg","dimension_vector":[0,1,0,0,0,0,0]},
+    {"id":"TIME","name":"Time","symbol":"T","si_unit":"s","dimension_vector":[0,0,1,0,0,0,0]},
+    {"id":"ELECTRIC_CURRENT","name":"Electric current","symbol":"I","si_unit":"A","dimension_vector":[0,0,0,1,0,0,0]},
+    {"id":"THERMODYNAMIC_TEMPERATURE","name":"Thermodynamic temperature","symbol":"Θ","si_unit":"K","dimension_vector":[0,0,0,0,1,0,0]},
+    {"id":"AMOUNT_OF_SUBSTANCE","name":"Amount of substance","symbol":"N","si_unit":"mol","dimension_vector":[0,0,0,0,0,1,0]},
+    {"id":"LUMINOUS_INTENSITY","name":"Luminous intensity","symbol":"J","si_unit":"cd","dimension_vector":[0,0,0,0,0,0,1]}
+  ]
+}
