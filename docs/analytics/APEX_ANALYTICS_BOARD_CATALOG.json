@@ -1,0 +1,17 @@
+{
+  "version": "1.0.0",
+  "status": "ARCHITECTURE_DEFINED",
+  "tab": "APEX Analytics",
+  "boards": [
+    {"id":"revenue","name":"Revenue","cadence":"daily","metrics":["gross_revenue","net_revenue","orders","aov","conversion","refunds","payment_health"]},
+    {"id":"commerce","name":"Commerce","cadence":"daily","metrics":["products","catalog_health","inventory","fulfillment","checkout","webhooks"]},
+    {"id":"finance","name":"Financial Resilience","cadence":"weekly","metrics":["income","essential_burn","debt","interest","reserves","deployable_capital","net_worth"]},
+    {"id":"growth","name":"Growth","cadence":"weekly","metrics":["leads","acquisition","conversion","retention","pipeline"]},
+    {"id":"infrastructure","name":"Infrastructure","cadence":"continuous","metrics":["uptime","deployments","dns","integrations","errors"]},
+    {"id":"agents","name":"AI / Agents","cadence":"continuous","metrics":["executions","tool_calls","authorization","latency","failures","cost","verification"]},
+    {"id":"security","name":"Security","cadence":"continuous","metrics":["identity","permissions","denials","secrets_posture","vulnerabilities","audit_events"]},
+    {"id":"projects","name":"Projects","cadence":"daily","metrics":["milestones","blockers","velocity","verification"]}
+  ],
+  "states":["VERIFIED","OBSERVED","ESTIMATED","AVAILABLE","BLOCKED","STALE"],
+  "rule":"No metric may be presented as VERIFIED without direct evidence and reconciliation."
+}
