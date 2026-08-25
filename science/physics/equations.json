@@ -1,0 +1,1 @@
+{"version":"1.0","equations":[],"entry_schema":{"required":["id","name","domain","equation","variables","units","assumptions","applicability","source","validation_status"],"note":"No equations are asserted here until sourced and reviewed."}}
