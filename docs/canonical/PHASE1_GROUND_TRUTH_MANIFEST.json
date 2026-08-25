@@ -1,0 +1,28 @@
+{
+  "phase": "PHASE_1_GROUND_TRUTH",
+  "version": "1.0",
+  "status": "RUNTIME_VERIFICATION_REQUIRED",
+  "owner": "Rahmaan",
+  "required_services": ["api", "frontend", "postgres", "redis"],
+  "verification_checks": [
+    "docker_available",
+    "compose_config_valid",
+    "api_health",
+    "frontend_reachable",
+    "database_connectivity",
+    "redis_connectivity",
+    "worker_connectivity",
+    "gatekeeper_available",
+    "audit_chain_integrity",
+    "no_fake_green"
+  ],
+  "promotion_rule": "No component becomes VERIFIED from source inspection, configuration presence, expected responses, or documentation alone.",
+  "evidence_required": [
+    "observed command output",
+    "observed service status",
+    "observed health response",
+    "observed database connectivity",
+    "observed Redis connectivity",
+    "observed audit evidence"
+  ]
+}
