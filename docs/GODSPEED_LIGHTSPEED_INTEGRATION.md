@@ -1,6 +1,6 @@
 # GODSPEED ↔ LightSpeed Forge Integration
 
-This document makes `Apex-Hub` the integration/control-plane home while `LightSpeed-Forge` remains the dedicated forge application. The baseline Apex-Hub already describes a unified Godspeed platform and modular FastAPI routers; this integration adds a security boundary instead of embedding forge secrets or browser trust logic in the hub. fileciteturn28file0
+This document makes `Apex-Hub` the integration/control-plane home while `LightSpeed-Forge` remains the dedicated forge application. The existing Apex-Hub is already the unified Godspeed platform with modular FastAPI routers; this integration adds a security boundary instead of embedding forge secrets or browser trust logic in the hub.
 
 ## Boundaries
 
