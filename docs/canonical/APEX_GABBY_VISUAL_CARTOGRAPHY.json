@@ -1,0 +1,33 @@
+{
+  "schema": "APEX_GABBY_VISUAL_CARTOGRAPHY",
+  "version": "1.0.0",
+  "status": "CANONICAL",
+  "rules": {
+    "preserve_all_content": true,
+    "allow_destructive_cropping": false,
+    "horizontal_navigation": "required",
+    "whole_picture_view": "required",
+    "single_gabby_runtime": true,
+    "orb_must_not_obstruct_primary_work": true
+  },
+  "reference_capture": {
+    "file": "assets/canonical/gabby/apex-workspace-reference-2026-08-29.svg",
+    "source": "user-provided visual reference capture",
+    "captured_viewport": {"width": 1080, "height": 1440},
+    "purpose": "regression evidence for clipped workspace/navigation defect"
+  },
+  "regions": [
+    {"id":"left-content","behavior":"preserve-and-scroll"},
+    {"id":"center-workspace","behavior":"focusable"},
+    {"id":"right-context","behavior":"preserve-and-scroll"},
+    {"id":"gabby-orb","behavior":"single-runtime-overlay-or-anchor"},
+    {"id":"bottom-controls","behavior":"fixed-or-scrollable-without-clipping"}
+  ],
+  "acceptance": {
+    "all_primary_content_reachable": true,
+    "left_right_scroll_or_equivalent": true,
+    "overview_tab_present": true,
+    "duplicate_gabby_count": 0,
+    "publish_requires_live_verification": true
+  }
+}
