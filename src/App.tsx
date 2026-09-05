@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Activity, AlertTriangle, ArrowUpRight, Bot, Boxes, CheckCircle2, Circle, Cloud, CreditCard, Database, ExternalLink, Github, Globe2, HardDrive, LayoutDashboard, LockKeyhole, Play, Search, Server, Settings, ShieldCheck, ShoppingBag, Terminal, WalletCards, Zap, ListChecks } from 'lucide-react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { LaunchRoadmap } from './components/LaunchRoadmap';
 
 type Status = 'VERIFIED' | 'OBSERVED' | 'AVAILABLE' | 'BLOCKED' | 'NOT_NEEDED';
@@ -117,6 +118,7 @@ export default function App() {
         </>}
         <footer className="footer"><span>APEX HUB · COMMAND CENTER</span><span>STATE: EVIDENCE-DRIVEN · LLM: PROPOSAL ONLY · NO FAKE GREEN</span></footer>
       </section>
+      <SpeedInsights />
     </main>
   );
 }
