@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Activity, AlertTriangle, ArrowUpRight, Bot, Boxes, CheckCircle2, Circle, Cloud, CreditCard, Database, ExternalLink, Github, Globe2, HardDrive, LayoutDashboard, LockKeyhole, Play, Search, Server, Settings, ShieldCheck, ShoppingBag, Terminal, WalletCards, Zap, ListChecks } from 'lucide-react';
+import { Activity, AlertTriangle, ArrowUpRight, Bot, Boxes, CheckCircle2, Circle, Cloud, CreditCard, Database, ExternalLink, Github, Globe2, HardDrive, LayoutDashboard, LockKeyhole, Play, Search, Server, Settings, ShieldCheck, ShoppingBag, Terminal, WalletCards, Zap, ListChecks, PanelLeftClose, PanelLeftOpen } from 'lucide-react';
 import { LaunchRoadmap } from './components/LaunchRoadmap';
 import { WorkChecklist } from './components/WorkChecklist';
 
@@ -39,6 +39,7 @@ export default function App() {
   const [filter, setFilter] = useState('ALL');
   const [query, setQuery] = useState('');
   const [view, setView] = useState<'dashboard' | 'launch'>('dashboard');
+  const [collapsed, setCollapsed] = useState(false);
   const selectedProvider = providers.find((provider) => provider.name === selected) ?? providers[0];
   const SelectedIcon = selectedProvider.icon;
   const visibleProviders = useMemo(() => providers.filter((provider) => {
@@ -54,19 +55,21 @@ export default function App() {
   }), []);
 
   return (
-    <main className="app-shell">
+    <main className={collapsed ? "app-shell sidebar-collapsed" : "app-shell"}>
       <aside className="sidebar">
-        <div className="brand"><div className="brand-mark">△</div><div><strong>APEX HUB</strong><span>COMMAND CENTER</span></div></div>
-        <nav>
-          <button className={view === 'dashboard' ? 'nav-item active' : 'nav-item'} onClick={() => setView('dashboard')}><LayoutDashboard size={17} /> Dashboard</button>
-          <button className="nav-item" onClick={() => setFilter('ALL')}><Boxes size={17} /> Connectors</button>
-          <button className="nav-item" onClick={() => setSelected('Stripe')}><CreditCard size={17} /> Revenue</button>
-          <button className="nav-item" onClick={() => setSelected('Google Cloud')}><Cloud size={17} /> Google Cloud</button>
-          <button className="nav-item" onClick={() => setSelected('GitHub')}><Github size={17} /> GitHub</button>
-          <button className="nav-item" onClick={() => setSelected('OpenAI')}><Bot size={17} /> Agents</button>
-          <button className={view === 'launch' ? 'nav-item active' : 'nav-item'} onClick={() => setView('launch')}><ListChecks size={17} /> Launch Roadmap</button>
-          <button className="nav-item" onClick={() => setFilter('BLOCKED')}><AlertTriangle size={17} /> Diagnostics</button>
-          <button className="nav-item"><Settings size={17} /> Settings</button>
+        <div className="brand">
+          <div className="brand-mark">△</div>
+          <div className="brand-copy"><strong>APEX HUB</strong><span>COMMAND CENTER</span></div>
+          <button className="nav-collapse" title={collapsed ? 'Expand navigation' : 'Collapse navigation'} onClick={() => setCollapsed(value => !value)}>
+            {collapsed ? <PanelLeftOpen size={16} /> : <PanelLeftClose size={16} />}
+          </button>
+        </div>
+        <nav aria-label="Primary navigation">
+          <button className={view === 'dashboard' && filter === 'ALL' ? 'nav-item active' : 'nav-item'} onClick={() => { setView('dashboard'); setFilter('ALL'); }}><LayoutDashboard size={17} /><span>Command Hub</span></button>
+          <button className={view === 'launch' ? 'nav-item active' : 'nav-item'} onClick={() => setView('launch')}><Bot size={17} /><span>Gabby AI</span></button>
+          <button className="nav-item" onClick={() => { setView('dashboard'); setFilter('ALL'); }}><Boxes size={17} /><span>Connectors</span></button>
+          <button className="nav-item" onClick={() => { setView('dashboard'); setSelected('Stripe'); }}><CreditCard size={17} /><span>Revenue</span></button>
+          <button className="nav-item" onClick={() => { setView('dashboard'); setFilter('BLOCKED'); }}><AlertTriangle size={17} /><span>Diagnostics</span></button>
         </nav>
         <div className="sidebar-bottom"><div className="security-badge"><LockKeyhole size={16} /><span>NO FAKE GREEN</span></div><small>Truth Gate: evidence first.<br />LLM: proposal only.</small></div>
       </aside>
@@ -81,6 +84,25 @@ export default function App() {
             <button className="icon-button" title="Open Stripe" onClick={() => openExternal('https://dashboard.stripe.com/settings/user')}><CreditCard size={18} /></button>
           </div>
         </header>
+
+        <div className="secondary-nav" aria-label="Secondary navigation">
+          {view === 'launch' ? (
+            <>
+              <span className="secondary-label">GABBY AI</span>
+              <button className="secondary-item active">Operator</button>
+              <button className="secondary-item" onClick={() => setView('dashboard')}>Command Hub</button>
+            </>
+          ) : (
+            <>
+              <span className="secondary-label">COMMAND HUB</span>
+              <button className={filter === 'ALL' ? 'secondary-item active' : 'secondary-item'} onClick={() => setFilter('ALL')}>Overview</button>
+              <button className={filter === 'P0' ? 'secondary-item active' : 'secondary-item'} onClick={() => setFilter('P0')}>P0 Providers</button>
+              <button className={filter === 'BLOCKED' ? 'secondary-item active' : 'secondary-item'} onClick={() => setFilter('BLOCKED')}>Diagnostics</button>
+              <button className="secondary-item" onClick={() => setSelected('GitHub')}>GitHub</button>
+              <button className="secondary-item" onClick={() => setSelected('Google Cloud')}>Google Cloud</button>
+            </>
+          )}
+        </div>
 
         {view === 'launch' ? <LaunchRoadmap /> : <>
           <section className="hero-panel">
