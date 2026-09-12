@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Activity, AlertTriangle, ArrowUpRight, Bot, Boxes, CheckCircle2, Circle, Cloud, CreditCard, Database, ExternalLink, Github, Globe2, HardDrive, LayoutDashboard, LockKeyhole, Play, Search, Server, Settings, ShieldCheck, ShoppingBag, Terminal, WalletCards, Zap, ListChecks } from 'lucide-react';
 import { LaunchRoadmap } from './components/LaunchRoadmap';
+import { WorkChecklist } from './components/WorkChecklist';
 
 type Status = 'VERIFIED' | 'OBSERVED' | 'AVAILABLE' | 'BLOCKED' | 'NOT_NEEDED';
 type Provider = { name: string; category: string; priority: 'P0' | 'P1' | 'P2'; status: Status; detail: string; url: string; icon: typeof Cloud; capabilities: string[] };
@@ -109,6 +110,8 @@ export default function App() {
               <div className="gate-list">{['DISCOVERED', 'AVAILABLE', 'AUTHORIZED', 'CONNECTED', 'HEALTHY', 'EXECUTABLE', 'VERIFIED'].map((gate, index) => <div key={gate} className={index < (selectedProvider.status === 'VERIFIED' ? 7 : selectedProvider.status === 'OBSERVED' ? 1 : 2) ? 'gate passed' : 'gate'}><span>{index + 1}</span><strong>{gate}</strong><small>{index === 6 && selectedProvider.status !== 'VERIFIED' ? 'NO GREEN' : index < 2 ? 'EVIDENCE' : 'PENDING'}</small></div>)}</div>
             </aside>
           </section>
+
+          <WorkChecklist />
 
           <section className="lower-grid">
             <div className="console-panel"><div className="section-head"><div><p className="eyebrow">APEX TERMINAL</p><h3>Command shortcuts</h3></div><Terminal size={19} /></div><div className="terminal"><div className="terminal-title"><span /><span /><span /><small>apex://kernel/commandbus</small></div>{commands.map((command) => <button key={command} onClick={() => navigator.clipboard?.writeText(command)}><span>$</span>{command}<ArrowUpRight size={13} /></button>)}</div></div>
