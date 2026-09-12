@@ -6,6 +6,7 @@ Before modifying any APEX/Gabby UI, read:
 2. `docs/canonical/APEX_GABBY_VISUAL_CARTOGRAPHY.json`
 3. `docs/canonical/APEX_GABBY_VISUAL_REFERENCE.md`
 4. `docs/canonical/APEX_GLOBAL_REPAIR_FAILSAFE.md` when the work involves troubleshooting, repair, audit, recovery, or guided fixes.
+5. `docs/canonical/APEX_GABBY_VALUE_EXCHANGE_TIME_RESPECT_LAW.md` whenever work involves customers, community, feedback, testing, contributors, support, commerce participation, or any workflow requesting user time.
 
 ## Mandatory behavior
 
@@ -17,6 +18,9 @@ Before modifying any APEX/Gabby UI, read:
 - Maintain exactly one Gabby runtime, one conversation, one voice, one command system, and one canonical orb.
 - Keep Gabby from obstructing primary work.
 - Preserve existing working capabilities during UI upgrades.
+- Respect customer and contributor time; follow the canonical value-exchange/time-respect law.
+- Never ask users for meaningful participation as though their time has no value.
+- Never promise rewards, compensation, credits, access, or recognition unless the applicable program actually provides them.
 - For repair flows, preserve the user's investigation checkpoint, show the current repair step, keep the next step ready, provide STOP / CONTINUE / CONTACT GABBY controls, and use the global 60-second observation-window protocol unless the repair requires a different duration.
 - Never silently mutate the repository when a repair timer expires.
 - Do not report a fix until source, build, runtime, interaction, and relevant visual behavior have been verified.
@@ -28,7 +32,6 @@ Before modifying any APEX/Gabby UI, read:
 `INSPECT → CHANGE → BUILD → TEST → RUN → INTERACT → VISUAL-CHECK → EVIDENCE → REPORT`
 
 If the implementation differs from the canonical reference, fix the implementation or explicitly document an authorized deviation. Do not silently simplify the design.
-
 
 ## Canonical Gabby identity and Shopify commerce co-host
 
@@ -57,3 +60,20 @@ Core requirements:
 - Do not silently expand AUTOSCOPE.
 - Destructive machine-level changes, credential rotation, infrastructure changes, production mutations, and unrelated-system access are outside AutoScope unless explicitly authorized.
 - Missing evidence means UNKNOWN/UNVERIFIED, never PASS.
+
+## Customer/community value exchange
+
+`docs/canonical/APEX_GABBY_VALUE_EXCHANGE_TIME_RESPECT_LAW.md` is canonical.
+
+When APEX requests customer/community/contributor time:
+- explain the purpose;
+- minimize unnecessary effort;
+- preserve context;
+- acknowledge the contribution;
+- provide an honest value exchange when a program offers one;
+- never invent or imply benefits that do not exist;
+- never waste the contributor's time through avoidable repetition or dead-end workflows.
+
+The governing objective is:
+
+`RESPECT TIME + CREATE VALUE + TELL THE TRUTH + COMPLETE THE JOB`.
