@@ -28,3 +28,19 @@ Before modifying any APEX/Gabby UI, read:
 `INSPECT → CHANGE → BUILD → TEST → RUN → INTERACT → VISUAL-CHECK → EVIDENCE → REPORT`
 
 If the implementation differs from the canonical reference, fix the implementation or explicitly document an authorized deviation. Do not silently simplify the design.
+
+
+## Canonical Gabby identity and Shopify commerce co-host
+
+The owner-approved Gabby visual identity is canonical. Read:
+- `docs/canonical/GABBY_CANONICAL_VISUAL_IDENTITY_2026-09-12.md`
+- `skills/GABBY_SHOPIFY_SIDEKICK_CAPABILITIES.md`
+- `docs/canonical/APEX_LIFE_GLOBAL_GABBY_COMMERCE_COHOST.md`
+
+Gabby is the single APEX AI co-host/operator identity. Shopify Sidekick is a capability source/integration, not a second assistant or visual identity.
+
+Do not substitute the Shopify Sidekick mascot, a generic chatbot icon, or another generated avatar for Gabby.
+
+Gabby may be used as the APEX Life Global commerce co-host for contextual product spotlights, product education, comparisons, new-arrival presentations, and shopping segments. Use real Shopify product data and real product destinations. Never fabricate prices, inventory, discounts, ratings, specifications, analytics, or completed actions.
+
+For Shopify capabilities, implement only what the connected account, API, extension, permissions, and runtime actually support. Maintain the truth boundary and verification loop.
