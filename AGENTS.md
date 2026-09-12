@@ -44,3 +44,16 @@ Do not substitute the Shopify Sidekick mascot, a generic chatbot icon, or anothe
 Gabby may be used as the APEX Life Global commerce co-host for contextual product spotlights, product education, comparisons, new-arrival presentations, and shopping segments. Use real Shopify product data and real product destinations. Never fabricate prices, inventory, discounts, ratings, specifications, analytics, or completed actions.
 
 For Shopify capabilities, implement only what the connected account, API, extension, permissions, and runtime actually support. Maintain the truth boundary and verification loop.
+
+## Runtime audit evidence, severity, and AutoScope
+
+For runtime/preview/production audits, read and enforce `docs/canonical/APEX_RUNTIME_AUDIT_EVIDENCE_SEVERITY_AUTOSCOPE.md`.
+
+Core requirements:
+- CLAIM ≠ EVIDENCE.
+- Every verification requires recorded evidence, method, scope, timestamp, observed result, artifact reference, and verdict.
+- Use E0–E4 evidence levels.
+- Classify exposure findings SEV-0 through SEV-4 using the canonical severity definitions.
+- Do not silently expand AUTOSCOPE.
+- Destructive machine-level changes, credential rotation, infrastructure changes, production mutations, and unrelated-system access are outside AutoScope unless explicitly authorized.
+- Missing evidence means UNKNOWN/UNVERIFIED, never PASS.
