@@ -1,0 +1,25 @@
+name: APEX Local Overnight Tests
+
+on:
+  push:
+    branches: [main, feature/overnight-phone-control]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install test dependencies
+        run: python -m pip install -r apex-local/requirements.txt
+      - name: Run APEX Local tests
+        working-directory: apex-local
+        run: python -m pytest -q
