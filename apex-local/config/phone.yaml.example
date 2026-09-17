@@ -1,0 +1,32 @@
+# Copy to phone.yaml locally. Do not commit a real private topic or gateway credential.
+notify:
+  backend: "ntfy"
+  topic: "apex-ovn-CHANGE-ME"
+  server: "https://ntfy.sh"
+  gateway:
+    # Prefer a private Tailscale URL. Do not expose an unauthenticated approval gateway publicly.
+    public_url: ""
+  priority:
+    silent: "min"
+    normal: "default"
+    urgent: "urgent"
+approval:
+  default_expiry_minutes: 30
+  auto_deny_on_expiry: true
+antigravity:
+  enabled: true
+  possible_paths:
+    - "%USERPROFILE%\\AppData\\Local\\Antigravity"
+    - "%USERPROFILE%\\AppData\\Roaming\\Antigravity"
+    - "%LOCALAPPDATA%\\Programs\\Antigravity"
+    - "%PROGRAMFILES%\\Antigravity"
+    - "%PROGRAMFILES(X86)%\\Antigravity"
+  possible_binaries:
+    - "antigravity.exe"
+    - "antigravity.cmd"
+    - "antigravity"
+    - "antigravity-cli.exe"
+  possible_configs:
+    - "%USERPROFILE%\\.antigravity\\config.json"
+    - "%USERPROFILE%\\.config\\antigravity\\config.json"
+    - "%APPDATA%\\Antigravity\\config.json"
