@@ -38,9 +38,7 @@ The registry distinguishes **product acquisition** from **sales-channel synchron
 | **Temu** | Marketplace | Third-party multichannel connectors exist | Depends on connector | Depends on source/terms | Research / verify rights before use |
 | **Ipsy** | Beauty retailer/subscription brand | No verified supplier-to-Shopify product feed established in this registry | Not established | Not established as a dropship/wholesale feed | **UNVERIFIED — do not treat as a supplier** |
 
-## What the user means by "give us products"
-
-There are several materially different cases:
+## What "give us products" can mean
 
 ### A. Supplier gives APEX a catalog
 
@@ -71,8 +69,6 @@ Technical ability to import a listing does **not** automatically grant APEX perm
 ### C. Sales-channel connector publishes APEX's own products elsewhere
 
 Examples: Shopify Marketplace Connect, TikTok Shop connectors, Walmart channel tools.
-
-This is the reverse direction:
 
 ```text
 APEX Shopify catalog
@@ -212,15 +208,9 @@ PUBLISHED
 
 A source remains `UNVERIFIED` until the relevant external account/feed/API operation is actually tested.
 
-## Research notes — current external evidence
+## Current research basis
 
-- Shopify's Marketplace Connect connects Shopify catalogs to Amazon, Target Plus, Walmart, and eBay; Shopify's help documentation notes that new Etsy connections are not currently available through Marketplace Connect. citeturn2search2
-- The Shopify App Store currently lists Etsy connectors capable of bulk product import/sync; one current example is Etsy Integration - DPL. citeturn0search9
-- DSers currently advertises product importing and bulk product push/edit for AliExpress/1688/Alibaba/US/TikTok-related sourcing workflows. citeturn1search11turn1search14
-- Faire's Shopify app syncs ordered products, orders, and inventory, but its listing explicitly says Faire does not support dropshipping. Its seller-side app also advertises product selection and bulk upload. citeturn0search0turn0search1
-- Printify's Shopify app currently advertises more than 1,300 custom products and no-inventory POD fulfillment. citeturn1search13
-- Gelato's Shopify app currently advertises hundreds of POD products, global fulfillment, and a free-to-install model with production/shipping charges when products are printed. citeturn1search0
-- Shopify's current marketplace app ecosystem includes product-sync and bulk-sync connectors for TikTok Shop, Etsy, Walmart, eBay, Amazon, and other channels. citeturn2search4turn2search6
+Current Shopify App Store / Shopify documentation research confirms that the ecosystem supports product sync and bulk workflows across multiple supplier and marketplace categories. Specific examples researched for this registry include Etsy connectors, DSers, Faire, Printify, Gelato, Walmart connectors, and broader marketplace-sync apps. Exact limits, fees, account eligibility, and rights vary by provider and must be tested before production use.
 
 ## Next implementation target
 
@@ -247,4 +237,6 @@ PRODUCT SOURCES
     └── Ipsy — UNVERIFIED until a legitimate supplier/catalog feed is established
 ```
 
-Every tab should show **SOURCE → ACCESS REQUIREMENT → PRODUCT COUNT → BULK LIMIT → COST → RIGHTS STATUS → TEST STATUS → LAST SYNC → ERROR LOG**.
+Every source tab should show:
+
+**SOURCE → ACCESS REQUIREMENT → PRODUCT COUNT → BULK LIMIT → COST → RIGHTS STATUS → TEST STATUS → LAST SYNC → ERROR LOG**.
