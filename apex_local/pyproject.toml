@@ -1,0 +1,16 @@
+[project]
+name = "apex-local"
+version = "0.1.0"
+description = "APEX Local — self-contained terminal + Python agent, zero cloud dependencies."
+requires-python = ">=3.9"
+dependencies = []
+
+[project.scripts]
+apex = "apex_local.cli:main"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["apex_local*"]
