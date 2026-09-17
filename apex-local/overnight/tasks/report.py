@@ -1,5 +1,4 @@
 """Evidence-driven morning report. No hard-coded commerce success claims."""
-from pathlib import Path
 from .base import Task
 
 
@@ -25,19 +24,21 @@ class Report(Task):
 
         path = self.log.root / "logs" / "APEX_OVERNIGHT_REPORT.md"
         path.parent.mkdir(parents=True, exist_ok=True)
+        ok_lines = [f"- {name}" for name in ok] or ["- None"]
+        failed_lines = [f"- {name}" for name in failed] or ["- None"]
         lines = [
             "# APEX Overnight Report",
             "",
             f"Run: `{self.log.run_id}`",
             "",
             f"Verified in this run: **{'YES' if report['verified_in_this_run'] else 'NO'}**",
-            f"Commercial mutations performed: **NO**",
+            "Commercial mutations performed: **NO**",
             "",
             "## Checks OK",
-            *[f"- {name}" for name in ok] or ["- None"],
+            *ok_lines,
             "",
             "## Checks Failed",
-            *[f"- {name}" for name in failed] or ["- None"],
+            *failed_lines,
             "",
             "## Morning Action",
             "- Review any failed checks and explicit owner-approval requests.",
