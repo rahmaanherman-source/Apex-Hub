@@ -1,4 +1,10 @@
-"""Deterministic local build/test checks."""
+"""Deterministic local build/test checks.
+
+This module is an implementation module, not a pytest test module, even though
+its filename contains ``_test`` for historical compatibility with the plan.
+"""
+__test__ = False
+
 import json
 import subprocess
 from pathlib import Path
