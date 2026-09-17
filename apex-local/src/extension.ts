@@ -1,0 +1,2 @@
+import * as vscode from 'vscode'; import {TerminalManager} from './terminalManager';
+export function activate(ctx:vscode.ExtensionContext){const tm=new TerminalManager();ctx.subscriptions.push(vscode.commands.registerCommand('apex.openTerminal',()=>tm.open()),vscode.commands.registerCommand('apex.openVault',()=>tm.vault()),vscode.commands.registerCommand('apex.startBackend',()=>tm.backend()),vscode.commands.registerCommand('apex.health',()=>tm.health()));} export function deactivate(){}

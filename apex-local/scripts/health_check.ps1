@@ -1,0 +1,3 @@
+$Root="$env:USERPROFILE\Desktop\apex-local";Write-Host 'APEX Health Check' -ForegroundColor Cyan
+$checks=@(@{N='Python venv';O={Test-Path "$Root\venv\Scripts\python.exe"}},@{N='Ollama';O={[bool](Get-Command ollama -ErrorAction SilentlyContinue)} ,@{N='Backend :8000';O={try{(Invoke-WebRequest 'http://127.0.0.1:8000/health' -UseBasicParsing -TimeoutSec 3).StatusCode -eq 200}catch{$false}}},@{N='.env exists';O={Test-Path "$Root\secrets\.env"}},@{N='qwen model';O={try{(ollama list 2>$null)-match 'qwen2.5-coder'}catch{$false}}})
+foreach($c in $checks){$ok=& $c.O;if($ok){Write-Host "[OK]   $($c.N)" -ForegroundColor Green}else{Write-Host "[FAIL] $($c.N)" -ForegroundColor Red}}

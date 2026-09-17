@@ -1,0 +1,31 @@
+authority:
+  human_approval_required:
+    - shopify.productSet
+    - shopify.deleteProduct
+    - stripe.createCheckoutSession
+    - stripe.refund
+    - system.executeShell
+    - file.delete
+  auto_approved:
+    - shopify.getOrders
+    - stripe.listProducts
+    - research.webSearch
+    - content.generateCopy
+network:
+  require_https: true
+  allowed_hosts:
+    - localhost
+    - 127.0.0.1
+    - generativelanguage.googleapis.com
+    - cloud.leonardo.ai
+    - api.minimax.io
+    - '*.myshopify.com'
+    - api.stripe.com
+secrets:
+  storage: secrets/.env
+  rotation_days: 90
+audit:
+  log_all_commands: true
+  log_file: logs/apex_audit.jsonl
+  include_prompts: false
+  include_responses: false

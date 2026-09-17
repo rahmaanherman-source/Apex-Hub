@@ -1,0 +1,20 @@
+skills:
+  shopify:
+    enabled: true
+    handler: apex.skills.shopify
+    required_env: [SHOPIFY_ADMIN_TOKEN, SHOPIFY_STORE_DOMAIN]
+    operations:
+      - {name: productSet, requires_approval: true}
+      - {name: getOrders, requires_approval: false}
+  stripe:
+    enabled: true
+    handler: apex.skills.stripe_skill
+    required_env: [STRIPE_SECRET_KEY]
+    operations:
+      - {name: createCheckoutSession, requires_approval: true}
+      - {name: listProducts, requires_approval: false}
+  content:
+    enabled: true
+    handler: apex.skills.content
+    operations:
+      - {name: generateCopy, requires_approval: false}

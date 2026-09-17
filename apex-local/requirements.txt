@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+pyyaml
+python-dotenv
+requests
+ollama
+stripe
+websockets
+pytest
+httpx

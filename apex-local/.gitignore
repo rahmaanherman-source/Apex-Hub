@@ -1,0 +1,7 @@
+secrets/
+logs/
+__pycache__/
+venv/
+node_modules/
+out/
+.env

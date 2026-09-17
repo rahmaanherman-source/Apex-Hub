@@ -1,0 +1,8 @@
+[project]
+name='apex-local'
+version='1.0.0'
+description='APEX Local-first orchestration runtime'
+requires-python='>=3.10'
+dependencies=['fastapi','uvicorn[standard]','pyyaml','python-dotenv','requests','ollama','stripe','websockets']
+[tool.pytest.ini_options]
+pythonpath=['.']

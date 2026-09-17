@@ -1,0 +1,1 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","required":["amount_cents","product_name"],"properties":{"amount_cents":{"type":"integer","minimum":1},"product_name":{"type":"string","minLength":1},"success_url":{"type":"string","format":"uri"},"cancel_url":{"type":"string","format":"uri"}}}

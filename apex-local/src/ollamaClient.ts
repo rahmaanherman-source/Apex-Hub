@@ -1,0 +1,2 @@
+export async function ollamaTags(base='http://127.0.0.1:11434'){const r=await fetch(`${base}/api/tags`);if(!r.ok)throw new Error(`Ollama ${r.status}`);return r.json();}
+export async function ollamaGenerate(prompt:string,model='qwen2.5-coder:7b',base='http://127.0.0.1:11434'){const r=await fetch(`${base}/api/generate`,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({model,prompt,stream:false})});if(!r.ok)throw new Error(`Ollama ${r.status}`);return r.json();}

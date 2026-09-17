@@ -1,0 +1,11 @@
+sequenceDiagram
+ participant C as Client
+ participant A as API
+ participant O as Orchestrator
+ participant M as Ollama
+ C->>A: POST /run
+ A->>O: task
+ O->>M: prompt
+ M-->>O: result
+ O-->>A: result
+ A-->>C: response

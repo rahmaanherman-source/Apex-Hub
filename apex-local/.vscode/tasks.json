@@ -1,0 +1,1 @@
+{"version":"2.0.0","tasks":[{"label":"APEX: Start Backend","type":"shell","command":".\\venv\\Scripts\\python.exe -m uvicorn apex.main:app --reload --port 8000","options":{"cwd":"${workspaceFolder}"}},{"label":"APEX: Health","type":"shell","command":".\\scripts\\health_check.ps1","options":{"cwd":"${workspaceFolder}"}}]}

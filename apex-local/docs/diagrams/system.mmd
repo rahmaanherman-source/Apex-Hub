@@ -1,0 +1,8 @@
+flowchart TB
+ Client[VS Code / Terminal] --> API[FastAPI :8000]
+ API --> Orch[Orchestrator]
+ Orch --> Memory[SQLite Memory]
+ Orch --> Skills[Skill Registry]
+ Orch --> Ollama[Ollama Local Models]
+ Skills --> Shopify[Shopify]
+ Skills --> Stripe[Stripe]
