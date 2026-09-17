@@ -2,17 +2,19 @@
 param([switch]$DryRun)
 Add-Type -AssemblyName System.Windows.Forms
 $ErrorActionPreference='Stop'
-$Repo='https://github.com/rahmaanherman-source/Apex-Hub.git'
 $Root=Join-Path $env:USERPROFILE 'Desktop\apex-local'
 function Ask($t,$m){[System.Windows.Forms.MessageBox]::Show($m,$t,[System.Windows.Forms.MessageBoxButtons]::YesNo,[System.Windows.Forms.MessageBoxIcon]::Question) -eq [System.Windows.Forms.DialogResult]::Yes}
 function Info($t,$m){[System.Windows.Forms.MessageBox]::Show($m,$t,[System.Windows.Forms.MessageBoxButtons]::OK,[System.Windows.Forms.MessageBoxIcon]::Information)|Out-Null}
 Info 'APEX INSTALLER' 'APEX Local will install into Desktop\apex-local, create a Python venv, optionally install Ollama and local models, open the Vault, start FastAPI, open the docs, and create Desktop shortcuts.'
-if(Test-Path $Root){if(Ask 'APEX' 'Desktop\apex-local already exists. Update it from the canonical repository?'){Remove-Item $Root -Recurse -Force}else{Info 'APEX' 'Installation cancelled.';exit}}
-$zip=Join-Path $env:TEMP 'apex-hub-main.zip';$extract=Join-Path $env:TEMP 'apex-hub-main'
-if($DryRun){Info 'APEX DRY RUN' "Would install from $Repo to $Root.";exit}
+if(Test-Path $Root){if(Ask 'APEX' 'Desktop\apex-local already exists. Replace it with the current repository version?'){Remove-Item $Root -Recurse -Force}else{Info 'APEX' 'Installation cancelled.';exit}}
+if($DryRun){Info 'APEX DRY RUN' 'No files or system settings will be changed.';exit}
+$zip=Join-Path $env:TEMP 'apex-hub-main.zip';$tmp=Join-Path $env:TEMP 'APEX-Hub-Install'
+if(Test-Path $tmp){Remove-Item $tmp -Recurse -Force};New-Item -ItemType Directory -Force -Path $tmp|Out-Null
 Invoke-WebRequest 'https://github.com/rahmaanherman-source/Apex-Hub/archive/refs/heads/main.zip' -OutFile $zip
-if(Test-Path $extract){Remove-Item $extract -Recurse -Force};Expand-Archive $zip -DestinationPath $env:TEMP -Force
-Move-Item (Join-Path $env:TEMP 'Apex-Hub-main') $Root
+Expand-Archive $zip -DestinationPath $tmp -Force
+$source=Join-Path $tmp 'Apex-Hub-main\apex-local'
+if(-not(Test-Path (Join-Path $source 'requirements.txt'))){throw 'APEX Local payload was not found in the repository.'}
+Copy-Item $source $Root -Recurse -Force
 New-Item -ItemType Directory -Force -Path "$Root\secrets","$Root\logs","$Root\data"|Out-Null
 if(Ask 'APEX — Python' 'Create the Python virtual environment and install dependencies?'){python -m venv "$Root\venv";& "$Root\venv\Scripts\python.exe" -m pip install --upgrade pip;& "$Root\venv\Scripts\python.exe" -m pip install -r "$Root\requirements.txt"}
 if(Ask 'APEX — Ollama' 'Install Ollama if it is not already installed?'){if(-not(Get-Command ollama -ErrorAction SilentlyContinue)){ $o=Join-Path $env:TEMP 'OllamaSetup.exe';Invoke-WebRequest 'https://ollama.com/download/OllamaSetup.exe' -OutFile $o;Start-Process $o -Wait }}
