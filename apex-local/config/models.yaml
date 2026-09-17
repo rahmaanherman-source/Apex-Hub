@@ -4,10 +4,27 @@ local:
   reasoning: qwen2.5-coder:7b
   creative: llama3.2:3b
   fast: llama3.2:3b
+
 cloud:
-  google: {model: gemini-2.0-flash, key_env: GOOGLE_AI_STUDIO_KEY, enabled: false}
-  leonardo: {model: leonardo-creative, key_env: LEONARDO_API_KEY, enabled: false}
-  minimax: {model: video-01, key_env: MINIMAX_API_KEY, enabled: false}
+  google:
+    model: gemini-2.0-flash
+    key_env: GOOGLE_AI_STUDIO_KEY
+    mode: on_demand
+    window_seconds: 60
+    require_confirm: true
+  leonardo:
+    model: leonardo-creative
+    key_env: LEONARDO_API_KEY
+    mode: on_demand
+    window_seconds: 90
+    require_confirm: true
+  minimax:
+    model: video-01
+    key_env: MINIMAX_API_KEY
+    mode: on_demand
+    window_seconds: 120
+    require_confirm: true
+
 routing:
   coding: local.coding
   reasoning: local.reasoning
@@ -16,5 +33,6 @@ routing:
   image_generation: cloud.leonardo
   video_generation: cloud.minimax
   fallback_to_cloud: false
+  cloud_window_auto_close: true
   max_local_concurrent: 2
   request_timeout_seconds: 120
