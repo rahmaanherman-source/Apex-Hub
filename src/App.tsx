@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { Activity, AlertTriangle, ArrowUpRight, Bot, Boxes, CheckCircle2, Circle, Cloud, CreditCard, Database, ExternalLink, Github, Globe2, HardDrive, LayoutDashboard, LockKeyhole, Play, Search, Server, Settings, ShieldCheck, ShoppingBag, Terminal, WalletCards, Zap, ListChecks } from 'lucide-react';
 import { LaunchRoadmap } from './components/LaunchRoadmap';
 import { WorkChecklist } from './components/WorkChecklist';
+import { Apex365Gateway, type GatewayAction } from './components/Apex365Gateway';
 
 type Status = 'VERIFIED' | 'OBSERVED' | 'AVAILABLE' | 'BLOCKED' | 'NOT_NEEDED';
 type Provider = { name: string; category: string; priority: 'P0' | 'P1' | 'P2'; status: Status; detail: string; url: string; icon: typeof Cloud; capabilities: string[] };
@@ -38,7 +39,14 @@ export default function App() {
   const [selected, setSelected] = useState('Stripe');
   const [filter, setFilter] = useState('ALL');
   const [query, setQuery] = useState('');
-  const [view, setView] = useState<'dashboard' | 'launch'>('dashboard');
+  const [view, setView] = useState<'gateway' | 'dashboard' | 'launch' | 'overview'>('gateway');
+  const openGatewayAction = (action: GatewayAction) => {
+    if (action === 'shopify') { openExternal('https://apexlifeglobal.com'); return; }
+    if (action === 'vercel') { openExternal('https://vercel.com/rahmaanherman-sources-projects/apex-365-w9'); return; }
+    if (action === 'github') { openExternal('https://github.com/rahmaanherman-source/Apex-Hub'); return; }
+    if (action === 'ai-studio') { openExternal('https://aistudio.google.com/'); return; }
+    setView('overview');
+  };
   const selectedProvider = providers.find((provider) => provider.name === selected) ?? providers[0];
   const SelectedIcon = selectedProvider.icon;
   const visibleProviders = useMemo(() => providers.filter((provider) => {
@@ -58,7 +66,9 @@ export default function App() {
       <aside className="sidebar">
         <div className="brand"><div className="brand-mark">△</div><div><strong>APEX HUB</strong><span>COMMAND CENTER</span></div></div>
         <nav>
-          <button className={view === 'dashboard' ? 'nav-item active' : 'nav-item'} onClick={() => setView('dashboard')}><LayoutDashboard size={17} /> Dashboard</button>
+          <button className={view === 'gateway' ? 'nav-item active' : 'nav-item'} onClick={() => setView('gateway')}><Globe2 size={17} /> APEX 365</button>
+          <button className={view === 'overview' ? 'nav-item active' : 'nav-item'} onClick={() => setView('overview')}><LayoutDashboard size={17} /> Whole Picture</button>
+          <button className={view === 'dashboard' ? 'nav-item active' : 'nav-item'} onClick={() => setView('dashboard')}><Boxes size={17} /> Command Center</button>
           <button className="nav-item" onClick={() => setFilter('ALL')}><Boxes size={17} /> Connectors</button>
           <button className="nav-item" onClick={() => setSelected('Stripe')}><CreditCard size={17} /> Revenue</button>
           <button className="nav-item" onClick={() => setSelected('Google Cloud')}><Cloud size={17} /> Google Cloud</button>
@@ -73,7 +83,7 @@ export default function App() {
 
       <section className="workspace">
         <header className="topbar">
-          <div><p className="eyebrow">APEX / KERNEL</p><h1>{view === 'launch' ? 'Launch Roadmap' : 'Command Center'}</h1></div>
+          <div><p className="eyebrow">APEX LIFE GLOBAL / KERNEL</p><h1>{view === 'gateway' ? 'APEX 365' : view === 'overview' ? 'Whole Picture' : view === 'launch' ? 'Launch Roadmap' : 'Command Center'}</h1></div>
           <div className="top-actions">
             {view === 'dashboard' && <div className="search"><Search size={16} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search providers, capabilities…" /></div>}
             <button className="icon-button" title="Open GitHub" onClick={() => openExternal('https://github.com/rahmaanherman-source/Apex-Hub')}><Github size={18} /></button>
@@ -82,7 +92,7 @@ export default function App() {
           </div>
         </header>
 
-        {view === 'launch' ? <LaunchRoadmap /> : <>
+        {view === 'gateway' ? <Apex365Gateway onAction={openGatewayAction} /> : view === 'overview' ? <section className="overview-panel"><div className="section-head"><div><p className="eyebrow">WHOLE PICTURE / APEX 365</p><h3>Front door to connected capabilities</h3></div><button className="secondary-button" onClick={() => setView('gateway')}>BACK TO APEX 365</button></div><div className="overview-flow"><div className="overview-node primary"><Globe2 size={22} /><strong>APEX 365</strong><span>Customer gateway / control layer</span></div><div className="overview-branches"><button onClick={() => openGatewayAction('shopify')}><ShoppingBag size={20} /><strong>Commerce</strong><span>Shopify storefront</span><ArrowUpRight size={14} /></button><button onClick={() => openGatewayAction('vercel')}><Globe2 size={20} /><strong>Developer infrastructure</strong><span>Vercel applications</span><ArrowUpRight size={14} /></button><button onClick={() => openGatewayAction('ai-studio')}><Bot size={20} /><strong>AI / Models</strong><span>Google AI Studio</span><ArrowUpRight size={14} /></button><button onClick={() => openGatewayAction('github')}><Github size={20} /><strong>Engineering</strong><span>GitHub source and delivery</span><ArrowUpRight size={14} /></button></div></div><div className="dns-note"><ShieldCheck size={18} /><div><strong>DNS truth boundary</strong><span>Keep <code>A @ 23.227.38.74</code> for Shopify. Vercel ownership uses <code>TXT vercel</code>; it must not replace the storefront A record.</span></div></div></section> : view === 'launch' ? <LaunchRoadmap /> : <>
           <section className="hero-panel">
             <div><p className="eyebrow">GODSPEED / EXECUTION SURFACE</p><h2>Everything important.<br /><span>One command surface.</span></h2><p>APEX determines what is available, opens the real service, executes only inside authority, and refuses to manufacture GREEN.</p></div>
             <div className="hero-actions"><button className="primary-button" onClick={() => setView('launch')}><Play size={17} /> RUN LAUNCH AUDIT</button><button className="secondary-button" onClick={() => openExternal('https://github.com/rahmaanherman-source/Apex-Hub')}><Github size={17} /> REPOSITORY</button></div>
