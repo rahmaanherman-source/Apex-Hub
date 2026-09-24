@@ -1,0 +1,132 @@
+{
+  "name": "APEX Free AI Media Stack",
+  "updated": "2026-09-23",
+  "purpose": "Launchpad for free/zero-cost AI image, video, caption, editing and ad-creative tools. Credit amounts and rights are tracked as evidence, not assumptions.",
+  "rules": [
+    "Free access is not automatically commercial permission.",
+    "Record the exact plan, allowance, watermark state and rights before publishing a commercial asset.",
+    "Account-dependent promotions are marked VERIFY rather than treated as guaranteed.",
+    "Never put API keys, passwords or session tokens in this repository."
+  ],
+  "tools": [
+    {
+      "name": "ImagesArt.ai",
+      "category": ["image", "image-to-video", "effects"],
+      "free": "5 credits/day",
+      "watermark": "none",
+      "commercial": "yes — pricing page lists commercial license",
+      "evidence": "https://imagesart.ai/pricing",
+      "launch": "https://imagesart.ai/"
+    },
+    {
+      "name": "ImagineArt",
+      "category": ["image", "text-to-video", "image-to-video"],
+      "free": "100 daily credits; free tier lists 3,000 credits/month",
+      "watermark": "verify in current account",
+      "commercial": "verify current plan/terms before paid advertising",
+      "evidence": "https://www.imagine.art/ai-video-generator",
+      "launch": "https://www.imagine.art/"
+    },
+    {
+      "name": "Pika",
+      "category": ["text-to-video", "image-to-video", "effects"],
+      "free": "150 credits/month on current FAQ",
+      "watermark": "verify current export",
+      "commercial": "no on Basic/free according to Pika FAQ/terms",
+      "evidence": "https://pika.art/faq",
+      "launch": "https://pika.art/"
+    },
+    {
+      "name": "Runway",
+      "category": ["image-to-video", "creative video"],
+      "free": "125 one-time credits; does not renew",
+      "watermark": "free-plan output may be watermarked",
+      "commercial": "verify current free-plan rights before commercial use",
+      "evidence": "https://help.runwayml.com/hc/en-us/articles/50404627334547-Free-plan-details",
+      "launch": "https://runway.com/"
+    },
+    {
+      "name": "Canva Free",
+      "category": ["ads", "design", "video", "templates"],
+      "free": "up to 20 Standard or Premium AI uses; 5GB storage",
+      "watermark": "free/owned content can export cleanly; Pro content has restrictions",
+      "commercial": "Canva license permits advertising/promotional projects subject to content-specific restrictions",
+      "evidence": "https://www.canva.com/pricing/",
+      "license": "https://www.canva.com/policies/content-license-agreement-2026-04-15/",
+      "launch": "https://www.canva.com/"
+    },
+    {
+      "name": "Adobe Express Free",
+      "category": ["video editing", "ads", "design", "Firefly"],
+      "free": "2 lifetime 5-second Generate Video uses; free daily generations for some image features",
+      "watermark": "verify asset/export route",
+      "commercial": "verify feature-specific Firefly/free-plan terms",
+      "evidence": "https://www.adobe.com/express/pricing",
+      "launch": "https://www.adobe.com/express/"
+    },
+    {
+      "name": "HeyGen Free",
+      "category": ["avatar", "spokesperson", "ads"],
+      "free": "3 videos/month, up to 1 minute; regional limits can vary",
+      "watermark": "free plan does not include watermark removal",
+      "commercial": "verify current plan terms before commercial publishing",
+      "evidence": "https://www.heygen.com/pricing",
+      "launch": "https://www.heygen.com/"
+    },
+    {
+      "name": "Formats",
+      "category": ["captions", "video editing"],
+      "free": "10 one-time credits / about 5 minutes AI captions",
+      "watermark": "none on local exports",
+      "commercial": "verify current terms",
+      "evidence": "https://www.formats.app/pricing",
+      "launch": "https://www.formats.app/"
+    },
+    {
+      "name": "ImgAI",
+      "category": ["image", "video", "product creative"],
+      "free": "10 images/day on free models without signup; 50 signup credits; 5–30 daily check-in credits",
+      "watermark": "verify by model/workflow",
+      "commercial": "possible subject to selected model/provider terms",
+      "evidence": "https://imgai.ai/free-credits",
+      "terms": "https://imgai.ai/terms-of-service",
+      "launch": "https://imgai.ai/"
+    },
+    {
+      "name": "CapCut",
+      "category": ["video editing", "ads", "templates", "captions"],
+      "free": "free editor plus free commercial-use templates; AI allowances vary by feature/account",
+      "watermark": "depends on template/asset/workflow",
+      "commercial": "commercial-use template collection exists; check each asset's license",
+      "evidence": "https://www.capcut.com/explore/for-commercial-use",
+      "launch": "https://www.capcut.com/"
+    },
+    {
+      "name": "Luma Dream Machine",
+      "category": ["image-to-video", "text-to-video"],
+      "free": "limited free web generations/credits; current allowance is account-dependent",
+      "watermark": "free web output may be watermarked",
+      "commercial": "free web use should be treated as non-commercial unless current plan terms say otherwise",
+      "evidence": "https://docs.lumalabs.ai/docs/faq",
+      "launch": "https://lumalabs.ai/dream-machine"
+    },
+    {
+      "name": "Artiroom",
+      "category": ["image", "video", "real-estate ads"],
+      "free": "10 credits/month",
+      "watermark": "free video is watermarked",
+      "commercial": "commercial license is not included on the free tier according to current pricing",
+      "evidence": "https://www.artiroom.com/pricing",
+      "launch": "https://www.artiroom.com/"
+    },
+    {
+      "name": "Image2.im",
+      "category": ["image", "video", "music video"],
+      "free": "up to 2 registration credits",
+      "watermark": "verify free output",
+      "commercial": "verify current free-plan rights",
+      "evidence": "https://image2.im/pricing",
+      "launch": "https://image2.im/"
+    }
+  ]
+}
