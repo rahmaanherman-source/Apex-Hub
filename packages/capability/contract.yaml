@@ -1,0 +1,42 @@
+# CAPABILITY CONTRACT — apex-agent-v1
+# Default deny. Any capability not listed under allowed is denied.
+
+capabilities:
+  allowed:
+    - name: generate_text
+      tool: llm.completion
+      description: Text generation and drafting
+    - name: generate_code
+      tool: codegen.write
+      description: Code and script generation
+    - name: generate_diagram
+      tool: mermaid.render
+      description: Mermaid diagrams and SVG source
+    - name: generate_ascii
+      tool: ascii.art
+      description: ASCII art generation
+    - name: read_file
+      tool: fs.read
+      description: Read authorized local files
+    - name: search_web
+      tool: search.query
+      description: Web search
+
+  forbidden:
+    - generate_image
+    - generate_video
+    - generate_audio
+    - render.photorealistic
+    - image.edit
+    - video.edit
+    - media.upscale
+    - media.enhance
+
+  mcp:
+    policy: REGISTERED_ONLY
+    public_servers: DENY_BY_DEFAULT
+
+ enforcement:
+  default_action: DENY
+  on_violation: BLOCK_AND_AUDIT
+  require_independent_gate: true
