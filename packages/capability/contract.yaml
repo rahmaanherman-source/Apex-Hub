@@ -36,7 +36,7 @@ capabilities:
     policy: REGISTERED_ONLY
     public_servers: DENY_BY_DEFAULT
 
- enforcement:
+enforcement:
   default_action: DENY
   on_violation: BLOCK_AND_AUDIT
   require_independent_gate: true
